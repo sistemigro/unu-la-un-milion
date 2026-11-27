@@ -26,7 +26,7 @@ import {
 
 type Props = { gameId: GameId; title: string; prompts: Pick<ClientPrompt, 'id' | 'region'>[]; nextGameId?: GameId }
 
-type Phase = 'idle' | 'loading' | 'answering' | 'submitting' | 'result' | 'finished'
+type Phase = 'idle' | 'loading' | 'answering' | 'submitting' | 'check-error' | 'result' | 'finished'
 
 type State = {
   phase: Phase
@@ -48,6 +48,7 @@ type Action =
   | { type: 'loaded'; at: number }
   | { type: 'loading' }
   | { type: 'submit' }
+  | { type: 'check-error' }
   | { type: 'miss'; answer: string }
   | { type: 'score'; result: PromptResult; offline?: boolean; skipped?: boolean }
   | { type: 'next'; at: number; total: number }
@@ -60,7 +61,7 @@ function ratat(prompt: Pick<ClientPrompt, 'id' | 'region'>, answer = ''): Prompt
   return { promptId: prompt.id, region: prompt.region, answer, tier: 'ratat', points: 0 }
 }
 
-function reducer(state: State, action: Action): State {
+export function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'begin':
       return { ...state, phase: 'loading', index: 0, promptStartedAt: action.at }
@@ -79,6 +80,8 @@ function reducer(state: State, action: Action): State {
       return { ...state, phase: 'loading' }
     case 'submit':
       return { ...state, phase: 'submitting', rejected: null, offline: false }
+    case 'check-error':
+      return { ...state, phase: 'check-error' }
     case 'miss':
       return { ...state, phase: 'answering', rejected: action.answer }
     case 'score':
@@ -129,6 +132,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
   const [officialScore, setOfficialScore] = useState<number | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const pendingRef = useRef(false)
+  const checkRef = useRef<CheckRequest | null>(null)
   const [skipError, setSkipError] = useState(false)
 
   const prompt = activePrompt
@@ -217,15 +221,20 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
     event.preventDefault()
     const answer = draft.trim().slice(0, MAX_ANSWER_LENGTH)
     if (!answer || phase !== 'answering' || !prompt || pendingRef.current) return
-    pendingRef.current = true
-    setSkipError(false)
-
     // Stamped before the fetch: the round trip is not on the player's clock.
     const submittedAt = Date.now()
     const elapsedMs = Math.max(0, submittedAt - promptStartedAt)
-    dispatch({ type: 'submit' })
-
     const body: CheckRequest = { gameId, promptId: prompt.id, answer, elapsedMs }
+    checkRef.current = body
+    await checkSubmittedAnswer(body, prompt)
+  }
+
+  async function checkSubmittedAnswer(body: CheckRequest, currentPrompt: ClientPrompt) {
+    if (pendingRef.current) return
+    pendingRef.current = true
+    setSkipError(false)
+    dispatch({ type: 'submit' })
+    const { answer } = body
     let result: CheckResult
     try {
       result = await postCheck(body)
@@ -233,9 +242,8 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
       try {
         result = await postCheck(body)
       } catch {
-        // Never trap the player in a dead prompt.
-        dispatch({ type: 'score', result: ratat(prompt, answer), offline: true })
-        setDraft('')
+        pendingRef.current = false
+        dispatch({ type: 'check-error' })
         return
       }
     }
@@ -245,7 +253,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
         pendingRef.current = false
         dispatch({ type: 'miss', answer })
       } else {
-        dispatch({ type: 'score', result: ratat(prompt, answer) })
+        dispatch({ type: 'score', result: ratat(currentPrompt, answer) })
       }
       setDraft('')
       return
@@ -255,8 +263,8 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
     dispatch({
       type: 'score',
       result: {
-        promptId: prompt.id,
-        region: prompt.region,
+        promptId: currentPrompt.id,
+        region: currentPrompt.region,
         answer: result.canonical ?? answer,
         tier: result.tier,
         points: result.points,
@@ -392,7 +400,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
         </div>
       )}
 
-      {(phase === 'answering' || phase === 'submitting') && prompt && (
+      {(phase === 'answering' || phase === 'submitting' || phase === 'check-error') && prompt && (
         <section className="mt-4">
           <div className="card p-4">
             <p className="font-display text-xs text-muted">
@@ -441,6 +449,8 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
           </form>
 
           <button type="button" disabled={phase !== 'answering'} onClick={() => void skip()} className="mt-3 w-full border-2 px-4 py-3 text-base font-bold disabled:opacity-60">Sari peste</button>
+
+          {phase === 'check-error' && <div role="alert" className="mt-3 text-sm">Nu am putut verifica răspunsul. <button type="button" className="font-bold underline" onClick={() => { if (checkRef.current) void checkSubmittedAnswer(checkRef.current, prompt) }}>Reîncearcă</button></div>}
 
           <div role="status" className="mt-2 min-h-5 text-sm text-brand">
             {phase === 'submitting' && 'Se verifică…'}
