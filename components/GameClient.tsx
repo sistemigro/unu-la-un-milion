@@ -269,6 +269,8 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
         answer: result.canonical ?? answer,
         tier: result.tier,
         points: result.points,
+        fact: result.fact,
+        commonAnswer: result.commonAnswer,
       },
     })
   }
@@ -467,6 +469,8 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
             +{state.last.points}
             <span className="sr-only"> puncte</span>
           </p>
+          {state.last.commonAnswer && <p className="mt-3 text-sm text-muted">Răspunsul-clișeu: {state.last.commonAnswer}</p>}
+          {state.last.fact && <div className="mt-4 border-2 border-dashed p-3 text-sm"><p className="font-display font-bold text-blue">Știai că…?</p><p className="mt-1 leading-snug">{state.last.fact}</p></div>}
           {state.last.tier === 'ratat' && !state.offline && !state.skipped && (
             <p className="mt-1 text-sm text-muted">Timpul a expirat.</p>
           )}

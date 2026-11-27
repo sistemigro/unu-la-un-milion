@@ -125,6 +125,8 @@ export type CheckResult = {
   /** The canonical spelling of what the player typed, or null on a miss. */
   canonical: string | null
   regionId: RegionId
+  fact?: string
+  commonAnswer?: string
 }
 
 /** POST body for /api/check. The client owns the clock; the server clamps it. */

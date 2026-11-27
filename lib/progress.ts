@@ -16,6 +16,8 @@ export type PromptResult = {
   answer: string
   tier: Tier
   points: number
+  fact?: string
+  commonAnswer?: string
 }
 
 export type GameProgress = {

@@ -15,6 +15,15 @@ const cookieOf = (response: Response) => response.headers.get('set-cookie')!.spl
 afterEach(() => vi.useRealTimers())
 
 describe('question progression', () => {
+  it('returns a fact and common answer only for a matched answer', () => {
+    const result = checkAnswer(gameId, 'orase-oltenia', 'Craiova', 1000)
+    expect(result?.matched).toBe(true)
+    expect(result?.fact).toBeTruthy()
+    expect(result?.commonAnswer).toBe('Craiova')
+    const miss = checkAnswer(gameId, 'orase-oltenia', 'răspuns inexistent', 1000)
+    expect(miss?.fact).toBeUndefined()
+    expect(miss?.commonAnswer).toBeUndefined()
+  })
   it('does not accept Cuza as a participant in the 1918 union', () => {
     expect(checkAnswer('1-decembrie', 'personalitati-marea-unire', 'Alexandru Ioan Cuza', 1000)?.matched).toBe(false)
     expect(checkAnswer('istorie', 'marea-unire', 'Alexandru Ioan Cuza', 1000)?.matched).toBe(false)

@@ -128,6 +128,8 @@ export function checkAnswer(
     points,
     canonical: answer.name,
     regionId: prompt.region,
+    fact: (answerFacts as Record<string, Record<string, Record<string, string>>>)[gameId]?.[promptId]?.[answer.name],
+    commonAnswer: prompt.answers.reduce((most, current) => current.pop > most.pop ? current : most).name,
   }
 }
 
