@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Pixelify_Sans, Space_Grotesk } from 'next/font/google'
 import Link from 'next/link'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { SistemigroPromo } from '@/components/SistemigroPromo'
 
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
           <SistemigroPromo />
         </footer>
         <Tricolour />
+        <Analytics />
       </body>
     </html>
   )
