@@ -5,6 +5,7 @@ import geografie from '@/content/games/geografie.json'
 import istorie from '@/content/games/istorie.json'
 import mancareTraditii from '@/content/games/mancare-traditii.json'
 import muzicaFilm from '@/content/games/muzica-film.json'
+import sport from '@/content/games/sport.json'
 import { buildPromptIndex, matchAnswer, type PromptIndex } from '@/lib/match'
 import { popToPoints, pointsToTier } from '@/lib/score'
 import {
@@ -36,6 +37,7 @@ const BANKS: Partial<Record<GameId, Bank>> = {
   geografie: geografie as Bank,
   'muzica-film': muzicaFilm as Bank,
   'mancare-traditii': mancareTraditii as Bank,
+  sport: sport as Bank,
   // Add a line per pack as its bank is drafted and reviewed. A game with no
   // bank shows as "în curând" rather than 404ing.
 }
