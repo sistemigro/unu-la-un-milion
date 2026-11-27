@@ -9,7 +9,7 @@ import { countFinished, loadGame, markInFlight, saveGame, takeInFlight, type Pro
 import { logGameFinish, logGameStart } from '@/lib/client-events'
 import { pointsToTier, totalToTitle } from '@/lib/score'
 import {
-  ANSWER_MS,
+  ANSWER_SECONDS,
   MAX_ANSWER_LENGTH,
   MAX_SCORE,
   REGION_LABELS,
@@ -22,6 +22,7 @@ import {
   type GameId,
   type RegionId,
   type Tier,
+  answerMs,
 } from '@/lib/types'
 
 type Props = { gameId: GameId; title: string; prompts: Pick<ClientPrompt, 'id' | 'region'>[]; nextGameId?: GameId }
@@ -53,9 +54,12 @@ type Action =
   | { type: 'score'; result: PromptResult; offline?: boolean; skipped?: boolean }
   | { type: 'next'; at: number; total: number }
 
-const SEGMENTS = Math.round(ANSWER_MS / 1000)
-
-const answerEndsAt = (startedAt: number) => startedAt + ANSWER_MS
+/**
+ * Each prompt carries its own window: a proverb is a whole sentence to type,
+ * and 20 seconds measures typing speed rather than what the player knows.
+ */
+const secondsFor = (prompt: Pick<ClientPrompt, 'seconds'> | null) =>
+  answerMs(prompt?.seconds) / 1000
 
 function ratat(prompt: Pick<ClientPrompt, 'id' | 'region'>, answer = ''): PromptResult {
   return { promptId: prompt.id, region: prompt.region, answer, tier: 'ratat', points: 0 }
@@ -127,7 +131,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
   const [activePrompt, setActivePrompt] = useState<ClientPrompt | null>(null)
   const [loadError, setLoadError] = useState(false)
   const [draft, setDraft] = useState('')
-  const [segmentsLeft, setSegmentsLeft] = useState(SEGMENTS)
+  const [segmentsLeft, setSegmentsLeft] = useState(ANSWER_SECONDS)
   const [packsDone, setPacksDone] = useState(0)
   const [officialScore, setOfficialScore] = useState<number | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -137,6 +141,8 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
 
   const prompt = activePrompt
   const { phase, promptStartedAt } = state
+  const segments = secondsFor(prompt)
+  const answerEndsAt = (startedAt: number) => startedAt + segments * 1000
   const finished = phase === 'finished'
 
   const tiers: Partial<Record<RegionId, Tier>> = {}
@@ -198,7 +204,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
       cancelAnimationFrame(frame)
       document.removeEventListener('visibilitychange', evaluate)
     }
-  }, [phase, promptStartedAt, prompt])
+  }, [phase, promptStartedAt, prompt, segments])
 
   useEffect(() => {
     if (phase === 'result' || phase === 'finished') takeInFlight(gameId)
@@ -289,7 +295,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
         setSkipError(false)
         setDraft('')
         setActivePrompt(data.prompt)
-        setSegmentsLeft(SEGMENTS)
+        setSegmentsLeft(secondsFor(data.prompt))
         dispatch({ type: 'loaded', at: Date.now() })
       } else {
         dispatch({ type: 'next', at: Date.now(), total: prompts.length })
@@ -375,7 +381,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
         <section className="card mt-4 p-4">
           <h3 className="font-display text-lg font-bold">{title}</h3>
           <p className="mt-2 text-sm text-muted">
-            7 întrebări · 20 de secunde fiecare · un scor
+            7 întrebări · cronometru la fiecare · un scor
           </p>
           <button
             type="button"
@@ -412,7 +418,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
             role="timer"
             aria-label={`${segmentsLeft} secunde rămase`}
           >
-            {Array.from({ length: SEGMENTS }, (_, i) => (
+            {Array.from({ length: segments }, (_, i) => (
               <span
                 key={i}
                 aria-hidden="true"

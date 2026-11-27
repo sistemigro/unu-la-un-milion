@@ -11,8 +11,9 @@ import sport from '@/content/games/sport.json'
 import { buildPromptIndex, matchAnswer, type PromptIndex } from '@/lib/match'
 import { popToPoints, pointsToTier } from '@/lib/score'
 import {
+  ELAPSED_GRACE_MS,
   GAME_IDS,
-  MAX_ACCEPTED_ELAPSED_MS,
+  answerMs,
   type Bank,
   type ClientPrompt,
   type GameId,
@@ -80,6 +81,7 @@ export function getClientPrompts(gameId: GameId): ClientPrompt[] | null {
     region: prompt.region,
     text: prompt.text,
     answerCount: prompt.answers.length,
+    seconds: answerMs(prompt.seconds) / 1000,
   }))
 }
 
@@ -114,7 +116,8 @@ export function checkAnswer(
 
   // The client owns the clock — nothing else can, without sessions. This only
   // rejects the lazy cheat of replaying a prompt long after it closed.
-  if (elapsedMs !== undefined && (elapsedMs < 0 || elapsedMs > MAX_ACCEPTED_ELAPSED_MS)) {
+  const latest = answerMs(prompt.seconds) + ELAPSED_GRACE_MS
+  if (elapsedMs !== undefined && (elapsedMs < 0 || elapsedMs > latest)) {
     return miss
   }
 

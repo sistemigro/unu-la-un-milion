@@ -69,17 +69,18 @@ export default function Home() {
         </div>
       </header>
 
-      <PackList main={main} packs={packs} />
-
-      {/* First-time rules, in the page rather than a pop-up, as the brief asks. */}
-      <section className="card-flat mt-6 p-4">
+      {/* First-time rules, in the page rather than a pop-up, as the brief asks.
+          Directly under the title: a first-time visitor needs them before the packs. */}
+      <section className="card-flat mt-5 p-4">
         <h2 className="font-display text-base font-semibold">Cum se joacă</h2>
         <ol className="mt-2.5 flex list-decimal flex-col gap-1.5 pl-5 text-sm leading-snug">
-          <li>Șapte întrebări, 20 de secunde fiecare.</li>
+          <li>Șapte întrebări, cu cronometru la fiecare.</li>
           <li>Un singur răspuns la fiecare. Cu cât e mai rar, cu atât valorează mai mult.</li>
           <li>Fiecare răspuns coase o regiune pe harta ta a României.</li>
         </ol>
       </section>
+
+      <PackList main={main} packs={packs} />
     </div>
   )
 }

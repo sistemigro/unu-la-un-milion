@@ -1,7 +1,7 @@
 {
   "id": "muzica-film",
   "canary": "ZZ-BANK-CANARY-ZZ",
-  "title": "Muzică & Film",
+  "title": "Muzică & film",
   "prompts": [
     {
       "id": "actori-romani",
@@ -19,6 +19,7 @@
         { "name": "Sebastian Papaiani", "pop": 22, "note": "1936-2016; rolul titular în Păcală (1974)" },
         { "name": "Mircea Diaconu", "pop": 20, "note": "1949-2025; rolul principal în Filantropica (2002)" },
         { "name": "Ștefan Bănică", "pop": 20, "note": "1933-1995; actor de comedie în film și teatru, tatăl lui Ștefan Bănică jr." },
+        { "name": "Stela Popescu", "pop": 20, "note": "1935-2017; actriță de comedie, revistă și film, cuplu de scenă cu Alexandru Arșinel la Teatrul de Revistă Constantin Tănase" },
         { "name": "Draga Olteanu Matei", "pop": 18, "note": "1933-2023; actriță de comedie în film și teatru" },
         { "name": "Dem Rădulescu", "pop": 16, "alias": ["dumitru rădulescu"], "note": "1931-2000, născut la Râmnicu Vâlcea; Teatrul de Comedie" },
         { "name": "Ștefan Iordache", "pop": 15, "note": "1941-2008; actor la Teatrul Mic și la Teatrul Național București" },

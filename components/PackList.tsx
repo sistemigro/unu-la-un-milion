@@ -65,13 +65,11 @@ export function PackList({ main, packs }: { main: PackMeta; packs: PackMeta[] })
         <div className="flex flex-col gap-2.5 px-4 pt-3.5 pb-4">
           <h2 className="font-display text-[26px] font-bold">{main.title}</h2>
           <StitchMap className="w-full" tiers={tiersOf(mainSaved)} outlines />
-          {mainSaved ? (
+          {mainSaved && (
             <p className="text-sm">
               Scor: <strong>{mainSaved.score}</strong> / {MAX_SCORE} ·{' '}
               {totalToTitle(mainSaved.score)}
             </p>
-          ) : (
-            <p className="text-sm">7 întrebări · 20 de secunde fiecare · un scor</p>
           )}
           <Link
             href={`/joc/${main.id}`}
@@ -80,9 +78,6 @@ export function PackList({ main, packs }: { main: PackMeta; packs: PackMeta[] })
             {mainSaved ? 'Rejoacă' : 'Începe'}
           </Link>
           {mainSaved && <Link href={`/joc/${main.id}/raspunsuri`} className="border-2 px-2 py-2 text-center text-sm font-bold">Cu detalii</Link>}
-          <p className="text-xs leading-snug text-muted">
-            Aceleași întrebări pentru toată lumea, ca să vă puteți compara scorurile.
-          </p>
         </div>
       </section>
 

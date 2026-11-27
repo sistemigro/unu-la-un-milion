@@ -76,6 +76,7 @@
         { "name": "Eforie Nord", "pop": 22, "alias": ["eforie"], "note": "stațiune a orașului Eforie, între mare și lacul Techirghiol" },
         { "name": "Năvodari", "pop": 18, "note": "oraș-port, jud. Constanța, la nord de Mamaia" },
         { "name": "Sulina", "pop": 12, "note": "oraș, jud. Tulcea, la gura brațului Sulina; cel mai estic oraș al României" },
+        { "name": "Eforie Sud", "pop": 12, "note": "stațiune a orașului Eforie, jud. Constanța, la sud de lacul Techirghiol" },
         { "name": "Neptun", "pop": 10, "note": "stațiune din ansamblul Neptun-Olimp, oraș Mangalia, jud. Constanța" },
         { "name": "Techirghiol", "pop": 8, "note": "oraș-stațiune balneară pe lacul Techirghiol, la ~1 km de mare, jud. Constanța" },
         { "name": "Olimp", "pop": 6, "note": "stațiune din ansamblul Neptun-Olimp, oraș Mangalia" },

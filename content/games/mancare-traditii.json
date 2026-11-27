@@ -28,6 +28,7 @@
         { "name": "Mucenici", "pop": 12, "note": "figuri de aluat în formă de 8, fierte în sirop cu nucă în Moldova și coapte în Muntenia; se fac pe 9 martie" },
         { "name": "Pandișpan", "pop": 10, "note": "pandișpan din ouă, zahăr și făină, adesea cu fructe; prăjitură de casă" },
         { "name": "Cremșnit", "pop": 8, "note": "cremă de vanilie între foi de aluat; desert de patiserie preluat din bucătăria austriacă, tradițional în Transilvania" },
+        { "name": "Colivă", "pop": 7, "alias": ["colivă de grâu"], "note": "grâu fiert îndulcit cu miere sau zahăr, cu nucă măcinată; dulce ritual de pomenire, pregătit în toată țara" },
         { "name": "Șerbet", "pop": 6, "note": "pastă dulce de fructe sau zahăr, servită cu apă rece; moștenire orientală păstrată în Dobrogea și în sudul țării" },
         { "name": "Minciunele", "pop": 4, "alias": ["uscățele"], "note": "fâșii de aluat răsucite, prăjite și pudrate cu zahăr; nume diferite de la o regiune la alta" },
         { "name": "Dulceață de nuci verzi", "pop": 4, "note": "nuci culese necoapte, fierte lung în sirop; dulceață de cămară, frecventă în Oltenia și Muntenia" },

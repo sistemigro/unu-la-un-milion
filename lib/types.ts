@@ -71,9 +71,20 @@ export const TIER_SQUARE: Record<Tier, string> = {
 
 export const PROMPTS_PER_GAME = 7
 export const MAX_SCORE = 700
-export const ANSWER_MS = 20_000
-/** Server-side clamp: anything slower than this scores nothing. */
-export const MAX_ACCEPTED_ELAPSED_MS = 21_000
+/** The window a prompt gets unless it asks for more. */
+export const ANSWER_SECONDS = 20
+export const ANSWER_MS = ANSWER_SECONDS * 1000
+/** A prompt whose answers are whole sentences gets a longer window — typing
+ *  speed is not the skill being measured. Set per prompt in the bank. */
+export const MAX_ANSWER_SECONDS = 60
+/** Slack over a prompt's own window, for the round trip. */
+export const ELAPSED_GRACE_MS = 1_000
+
+/** The answer window for one prompt, from its optional `seconds` override. */
+export function answerMs(seconds?: number): number {
+  if (!Number.isFinite(seconds) || seconds === undefined) return ANSWER_MS
+  return Math.min(Math.max(Math.round(seconds), 1), MAX_ANSWER_SECONDS) * 1000
+}
 
 // ---------------------------------------------------------------------------
 // Bank shapes — SERVER ONLY. Never let a value of these types cross to the
@@ -95,6 +106,8 @@ export type BankPrompt = {
   text: string
   /** The acceptance boundary, for the reviewer. Not shown to players. */
   accepts: string
+  /** Overrides the 20s default. Only for prompts answered in full sentences. */
+  seconds?: number
   answers: BankAnswer[]
 }
 
@@ -116,6 +129,8 @@ export type ClientPrompt = {
   text: string
   /** How many answers are accepted, so the UI can hint at breadth. */
   answerCount: number
+  /** This prompt's answer window, already resolved against the default. */
+  seconds: number
 }
 
 export type CheckResult = {
@@ -158,10 +173,10 @@ export const GAME_TITLES: Record<GameId, string> = {
   '1-decembrie': 'Ediția 1 Decembrie',
   istorie: 'Istorie',
   geografie: 'Geografie',
-  'muzica-film': 'Muzică & Film',
+  'muzica-film': 'Muzică & film',
   sport: 'Sport',
   'mancare-traditii': 'Mâncare & tradiții',
-  'limba-meme': 'Limbă & meme',
+  'limba-meme': 'Limbaj & meme-uri',
 }
 
 export function isGameId(value: string): value is GameId {

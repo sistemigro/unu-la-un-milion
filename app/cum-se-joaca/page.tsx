@@ -20,7 +20,8 @@ export default function CumSeJoaca() {
         <li>
           <strong>Un singur răspuns, 20 de secunde.</strong> Vezi întrebarea trei
           secunde, apoi pornește cronometrul. Scrii un răspuns și îl trimiți. Dacă nu e
-          pe listă, poți încerca din nou cât mai ai timp.
+          pe listă, poți încerca din nou cât mai ai timp. Întrebările la care răspunsul
+          e o propoziție întreagă, cum sunt proverbele, primesc mai mult timp.
         </li>
         <li>
           <strong>Răspunsurile rare valorează mai mult.</strong> Un răspuns pe care îl

@@ -1,7 +1,7 @@
 {
   "id": "limba-meme",
   "canary": "ZZ-BANK-CANARY-ZZ",
-  "title": "Limbă & meme",
+  "title": "Limbaj & meme-uri",
   "prompts": [
     {
       "id": "cuvinte-regionale",
@@ -41,6 +41,7 @@
       "region": "muntenia",
       "text": "Un proverb românesc",
       "accepts": "Orice proverb sau zicătoare românească de circulație, atestată în culegerile clasice de proverbe (Zanne, Hințescu) sau în DEX; se acceptă variantele de formulare apropiate.",
+      "seconds": 35,
       "answers": [
         { "name": "Cine se scoală de dimineață departe ajunge", "pop": 55, "note": "proverb de largă circulație; îndemn la hărnicie, atestat în culegerile de proverbe românești" },
         { "name": "Apa trece, pietrele rămân", "pop": 52, "note": "proverb; ce e trecător dispare, ce e temeinic rămâne; și titlu de cântec popular" },
@@ -179,6 +180,14 @@
             "name": "Cremșnit",
             "pop": 8,
             "note": "cremă de vanilie între foi de aluat; desert de patiserie preluat din bucătăria austriacă, tradițional în Transilvania"
+          },
+          {
+            "name": "Colivă",
+            "pop": 7,
+            "alias": [
+              "colivă de grâu"
+            ],
+            "note": "grâu fiert îndulcit cu miere sau zahăr, cu nucă măcinată; dulce ritual de pomenire, pregătit în toată țara"
           },
           {
             "name": "Șerbet",
