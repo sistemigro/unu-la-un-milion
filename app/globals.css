@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens, taken verbatim from the design canvas.
+   Tailwind 4 has no config file: these ARE the theme. Anything declared here
+   becomes a utility (bg-linen, text-ink, border-ink, font-display, …).
+   --------------------------------------------------------------------------- */
+@theme {
+  /* Surfaces */
+  --color-linen: #f4ebdc;
+  --color-card: #fffdf6;
+
+  /* Thread */
+  --color-ink: #1e1a1a;
+  --color-muted: #5a4e40;
+  --color-faint: #6b5d4a;
+  --color-hairline: #8c7b62;
+  --color-dashed: #a08c6e;
+  --color-unspent: #d8c9ae;
+
+  /* Brand + tricolour */
+  --color-brand: #b3192b;
+  --color-action: #ce1126;
+  --color-blue: #002b7f;
+  --color-yellow: #fcd116;
+
+  /* Tier fills — must stay in step with TIER_FILL in lib/types.ts */
+  --color-tier-ulm: #ce1126;
+  --color-tier-rar: #fcd116;
+  --color-tier-bun: #002b7f;
+  --color-tier-cliseu: #ffffff;
+  --color-tier-ratat: #1e1a1a;
+
+  --font-display: var(--font-pixelify), ui-monospace, monospace;
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  /* The look is square. There is no radius in this design. */
+  --radius-none: 0;
+}
+
+/* Tailwind 4 changed the default border colour to `currentColor`. Every card
+   and button in this design is a 3px black "thread", so without this they
+   silently inherit text colour instead. */
+*,
+::before,
+::after {
+  border-color: var(--color-ink);
+}
+
+/* The linen ground: a faint 8px stitch grid. Authored as one SVG tile rather
+   than two 1px gradients, which shimmer on scroll at DPR 3. */
+@layer base {
+  :root {
+    --stitch-ground: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 .5H8M.5 0V8' stroke='rgba(140,110,70,0.10)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  }
+
+  body {
+    background-color: var(--color-linen);
+    background-image: var(--stitch-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  /* Pixel art and the map must never be smoothed. */
+  img {
+    image-rendering: pixelated;
+  }
+
+  /* Pixelify Sans ships a malformed `fi` ligature — "Verificare" renders as
+     "VeriAcare". Romanian display text hits it constantly (Confidențialitate,
+     Final, verifică), so ligatures are off on the display face. */
+  .font-display {
+    font-variant-ligatures: none;
+  }
+
+  a {
+    color: var(--color-brand);
+  }
+  a:hover {
+    color: #7d1220;
+  }
+
+  /* The stitch-filling and map animations are decorative. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility card {
+  background-color: var(--color-card);
+  border: 3px solid var(--color-ink);
+  box-shadow: 5px 5px 0 var(--color-ink);
+}
+
+@utility card-flat {
+  background-color: var(--color-card);
+  border: 2px solid var(--color-ink);
+}
+
+@utility btn-thread {
+  border: 3px solid var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  cursor: pointer;
+}
