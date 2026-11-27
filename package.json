@@ -1,0 +1,36 @@
+{
+  "name": "unu-la-un-milion",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "map:build": "tsx scripts/build-map-grid.ts",
+    "bank:report": "tsx scripts/bank-report.ts",
+    "bank:missed": "tsx scripts/missed.ts",
+    "check:leak": "bash scripts/check-leak.sh"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "next": "16.4.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4.3.3",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "4.3.3",
+    "tsx": "^4.20.3",
+    "typescript": "^5",
+    "vitest": "^5.1.2"
+  }
+}

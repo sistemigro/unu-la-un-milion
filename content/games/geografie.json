@@ -1,0 +1,398 @@
+{
+  "id": "geografie",
+  "canary": "ZZ-BANK-CANARY-ZZ",
+  "title": "Geografie",
+  "prompts": [
+    {
+      "id": "rauri-oltenia",
+      "region": "oltenia",
+      "text": "Un râu din Oltenia",
+      "accepts": "Orice curs de apă care traversează Oltenia (jud. Mehedinți, Gorj, Dolj, Vâlcea, Olt) sau îi formează granița",
+      "answers": [
+        { "name": "Olt", "pop": 58, "note": "615 km, dă numele Olteniei; traversează jud. Vâlcea și Olt, se varsă în Dunăre la Turnu Măgurele" },
+        { "name": "Jiu", "pop": 54, "note": "331 km, trece prin Târgu Jiu și Craiova, afluent al Dunării" },
+        { "name": "Dunărea", "pop": 24, "note": "mărginește Oltenia la sud, pe toată lungimea jud. Mehedinți, Dolj și Olt" },
+        { "name": "Motru", "pop": 11, "note": "134 km, afluent al Jiului, jud. Mehedinți și Gorj" },
+        { "name": "Gilort", "pop": 7, "note": "116 km, afluent al Jiului, jud. Gorj" },
+        { "name": "Cerna", "pop": 5, "note": "~79 km, se varsă în Dunăre la Orșova, jud. Mehedinți (altă Cerna există în Banat)" },
+        { "name": "Bistrița", "pop": 5, "note": "afluent al Oltului în jud. Vâlcea, lângă Mănăstirea Bistrița (Costești); nu este Bistrița moldavă" },
+        { "name": "Amaradia", "pop": 4, "note": "103 km, afluent al Jiului, jud. Gorj și Dolj" },
+        { "name": "Olteț", "pop": 3, "note": "185 km, afluent al Oltului; curge prin jud. Vâlcea, Gorj, Dolj și Olt" },
+        { "name": "Desnățui", "pop": 2, "note": "~90 km, jud. Dolj, se varsă în Dunăre" },
+        { "name": "Tismana", "pop": 2, "note": "afluent al Jiului, jud. Gorj; dă numele Mănăstirii Tismana" },
+        { "name": "Teslui", "pop": 2, "note": "afluent al Oltului în jud. Olt (există și un Teslui afluent al Jiului, în Dolj)" },
+        { "name": "Topolnița", "pop": 1, "note": "jud. Mehedinți, afluent al Dunării; a săpat Peștera Topolniței" },
+        { "name": "Drincea", "pop": 1, "note": "~80 km, jud. Mehedinți, afluent al Dunării" },
+        { "name": "Blahnița", "pop": 1, "note": "jud. Mehedinți, afluent al Dunării, în sud-vestul Olteniei" },
+        { "name": "Coșuștea", "pop": 1, "note": "afluent al Motrului, jud. Mehedinți" },
+        { "name": "Luncavăț", "pop": 1, "note": "afluent al Oltului, jud. Vâlcea" },
+        { "name": "Olănești", "pop": 1, "note": "afluent al Oltului, jud. Vâlcea; trece prin Băile Olănești" },
+        { "name": "Șușița", "pop": 1, "note": "afluent al Jiului, jud. Gorj (există și o Șușița în Vrancea)" }
+      ]
+    },
+    {
+      "id": "orase-muntenia",
+      "region": "muntenia",
+      "text": "Un oraș din Muntenia",
+      "accepts": "Orice municipiu sau oraș din Muntenia (București, Ilfov, Prahova, Dâmbovița, Argeș, Buzău, Ialomița, Călărași, Giurgiu, Teleorman, Brăila)",
+      "answers": [
+        { "name": "București", "pop": 72, "note": "capitala României, ~1,7 mil. locuitori, în centrul Munteniei" },
+        { "name": "Ploiești", "pop": 50, "note": "municipiu, reșed. jud. Prahova, centru petrolier" },
+        { "name": "Pitești", "pop": 38, "note": "municipiu, reșed. jud. Argeș, pe râul Argeș" },
+        { "name": "Brăila", "pop": 16, "note": "municipiu-port la Dunăre, reșed. jud. Brăila, estul Munteniei" },
+        { "name": "Buzău", "pop": 14, "note": "municipiu, reșed. jud. Buzău, pe râul Buzău" },
+        { "name": "Târgoviște", "pop": 13, "note": "municipiu, reșed. jud. Dâmbovița, fostă capitală a Țării Românești" },
+        { "name": "Giurgiu", "pop": 8, "note": "municipiu-port la Dunăre, reșed. jud. Giurgiu" },
+        { "name": "Sinaia", "pop": 7, "note": "oraș-stațiune pe Valea Prahovei, jud. Prahova" },
+        { "name": "Călărași", "pop": 6, "note": "municipiu la Dunăre, reșed. jud. Călărași" },
+        { "name": "Alexandria", "pop": 5, "note": "municipiu, reșed. jud. Teleorman" },
+        { "name": "Slobozia", "pop": 4, "note": "municipiu, reșed. jud. Ialomița" },
+        { "name": "Câmpina", "pop": 4, "note": "oraș petrolier, jud. Prahova" },
+        { "name": "Curtea de Argeș", "pop": 3, "note": "oraș pe râul Argeș, jud. Argeș" },
+        { "name": "Râmnicu Sărat", "pop": 3, "note": "municipiu, jud. Buzău" },
+        { "name": "Oltenița", "pop": 2, "note": "oraș-port la Dunăre, jud. Călărași" },
+        { "name": "Urziceni", "pop": 2, "note": "oraș, jud. Ialomița" },
+        { "name": "Fetești", "pop": 2, "note": "municipiu la Dunăre, jud. Ialomița" },
+        { "name": "Mizil", "pop": 1, "note": "oraș, jud. Prahova" },
+        { "name": "Nehoiu", "pop": 1, "note": "oraș pe râul Buzău, jud. Buzău" },
+        { "name": "Pucioasa", "pop": 1, "note": "oraș-stațiune pe Ialomița, jud. Dâmbovița" },
+        { "name": "Zimnicea", "pop": 1, "note": "oraș la Dunăre, jud. Teleorman; cel mai sudic oraș al României" },
+        { "name": "Videle", "pop": 1, "note": "oraș, jud. Teleorman" },
+        { "name": "Țăndărei", "pop": 1, "note": "oraș, jud. Ialomița" },
+        { "name": "Pogoanele", "pop": 1, "note": "oraș, jud. Buzău" }
+      ]
+    },
+    {
+      "id": "litoral-dobrogea",
+      "region": "dobrogea",
+      "text": "Un oraș sau o stațiune de pe litoralul Mării Negre",
+      "accepts": "Orice localitate sau stațiune din zona litorală românească a Mării Negre (jud. Constanța și litoralul jud. Tulcea), inclusiv stațiunile aflate la 1-2 km de plajă",
+      "answers": [
+        { "name": "Constanța", "pop": 65, "note": "municipiu, cel mai mare port românesc la Marea Neagră" },
+        { "name": "Mamaia", "pop": 52, "note": "stațiune a municipiului Constanța, între mare și lacul Siutghiol" },
+        { "name": "Mangalia", "pop": 40, "note": "municipiu-port în sudul litoralului, jud. Constanța" },
+        { "name": "Vama Veche", "pop": 34, "note": "sat-stațiune, com. Limanu, jud. Constanța, lângă granița cu Bulgaria" },
+        { "name": "Costinești", "pop": 25, "note": "stațiune, com. Costinești, jud. Constanța" },
+        { "name": "Eforie Nord", "pop": 22, "alias": ["eforie"], "note": "stațiune a orașului Eforie, între mare și lacul Techirghiol" },
+        { "name": "Năvodari", "pop": 18, "note": "oraș-port, jud. Constanța, la nord de Mamaia" },
+        { "name": "Sulina", "pop": 12, "note": "oraș, jud. Tulcea, la gura brațului Sulina; cel mai estic oraș al României" },
+        { "name": "Neptun", "pop": 10, "note": "stațiune din ansamblul Neptun-Olimp, oraș Mangalia, jud. Constanța" },
+        { "name": "Techirghiol", "pop": 8, "note": "oraș-stațiune balneară pe lacul Techirghiol, la ~1 km de mare, jud. Constanța" },
+        { "name": "Olimp", "pop": 6, "note": "stațiune din ansamblul Neptun-Olimp, oraș Mangalia" },
+        { "name": "Jupiter", "pop": 5, "note": "stațiune a orașului Mangalia, jud. Constanța" },
+        { "name": "Sfântu Gheorghe", "pop": 5, "note": "sat în Delta Dunării, jud. Tulcea, la gura brațului Sfântu Gheorghe, pe malul mării" },
+        { "name": "Saturn", "pop": 4, "note": "stațiune a orașului Mangalia, lângă portul turistic" },
+        { "name": "Venus", "pop": 4, "note": "stațiune a orașului Mangalia, jud. Constanța" },
+        { "name": "2 Mai", "pop": 4, "alias": ["doi mai"], "note": "sat, com. Limanu, jud. Constanța, vecin cu Vama Veche" },
+        { "name": "Cap Aurora", "pop": 3, "alias": ["aurora"], "note": "stațiune a orașului Mangalia, jud. Constanța" },
+        { "name": "Gura Portiței", "pop": 3, "note": "sat-stațiune, com. Jurilovca, jud. Tulcea, pe grindul dintre lagună și mare" },
+        { "name": "Corbu", "pop": 3, "note": "sat, jud. Constanța; cea mai nordică plajă turistică a litoralului" },
+        { "name": "Vadu", "pop": 2, "note": "sat, com. Corbu, jud. Constanța, cu plajă sălbatică" },
+        { "name": "Agigea", "pop": 2, "note": "comună litorală la sud de Constanța, cu portul Constanța Sud" },
+        { "name": "Tuzla", "pop": 1, "note": "comună litorală, jud. Constanța, cu far și falezã" }
+      ]
+    },
+    {
+      "id": "rauri-moldova",
+      "region": "moldova",
+      "text": "Un râu din Moldova",
+      "accepts": "Orice curs de apă din Moldova istorică, de la est de Carpați (jud. Suceava, Botoșani, Iași, Neamț, Bacău, Vaslui, Vrancea, Galați)",
+      "answers": [
+        { "name": "Prut", "pop": 55, "note": "~742 km pe teritoriul României; formează granița cu Rep. Moldova, se varsă în Dunăre" },
+        { "name": "Siret", "pop": 52, "note": "559 km în România, cel mai mare afluent interior al Dunării" },
+        { "name": "Bistrița", "pop": 35, "note": "283 km, izvorăște din Munții Rodnei, se varsă în Siret la Bacău" },
+        { "name": "Moldova", "pop": 26, "note": "213 km, afluent al Siretului; dă numele regiunii" },
+        { "name": "Trotuș", "pop": 15, "note": "162 km, afluent al Siretului, jud. Bacău" },
+        { "name": "Bârlad", "pop": 9, "note": "207 km, afluent al Siretului, jud. Vaslui și Galați" },
+        { "name": "Suceava", "pop": 8, "note": "173 km, afluent al Siretului, jud. Suceava" },
+        { "name": "Bahlui", "pop": 6, "note": "119 km, trece prin Iași, afluent al Jijiei" },
+        { "name": "Dunărea", "pop": 6, "note": "mărginește la sud jud. Galați, unde primește Siretul și Prutul" },
+        { "name": "Jijia", "pop": 5, "note": "275 km, afluent al Prutului, jud. Botoșani și Iași" },
+        { "name": "Putna", "pop": 4, "note": "153 km, afluent al Siretului, jud. Vrancea" },
+        { "name": "Tazlău", "pop": 2, "note": "89 km, afluent al Trotușului, jud. Neamț și Bacău" },
+        { "name": "Milcov", "pop": 2, "note": "afluent al Putnei, jud. Vrancea; trece pe lângă Focșani" },
+        { "name": "Bașeu", "pop": 1, "note": "afluent al Prutului, jud. Botoșani" },
+        { "name": "Berheci", "pop": 1, "note": "afluent al Bârladului, jud. Bacău și Galați" },
+        { "name": "Tutova", "pop": 1, "note": "afluent al Bârladului, jud. Vaslui" },
+        { "name": "Crasna", "pop": 1, "note": "afluent al Bârladului, jud. Vaslui" },
+        { "name": "Elan", "pop": 1, "note": "afluent al Prutului, jud. Vaslui" },
+        { "name": "Miletin", "pop": 1, "note": "afluent al Jijiei, jud. Botoșani și Iași" },
+        { "name": "Oituz", "pop": 1, "note": "afluent al Trotușului, jud. Bacău" },
+        { "name": "Sitna", "pop": 1, "note": "afluent al Jijiei, jud. Botoșani" },
+        { "name": "Suha", "pop": 1, "note": "afluent al Moldovei, jud. Suceava" }
+      ]
+    },
+    {
+        "id": "orase-banat-crisana",
+        "region": "banat-crisana",
+        "text": "Un oraș din Banat sau Crișana",
+        "accepts": "Orice oraș sau municipiu din Banat ori Crișana, adică din județele Timiș, Caraș-Severin, Arad și Bihor",
+        "answers": [
+          {
+            "name": "Timișoara",
+            "pop": 82,
+            "note": "municipiu, jud. Timiș; capitala istorică a Banatului"
+          },
+          {
+            "name": "Oradea",
+            "pop": 64,
+            "note": "municipiu, reședința jud. Bihor"
+          },
+          {
+            "name": "Arad",
+            "pop": 56,
+            "note": "municipiu, reședința jud. Arad"
+          },
+          {
+            "name": "Reșița",
+            "pop": 30,
+            "note": "municipiu, reședința jud. Caraș-Severin; centru siderurgic"
+          },
+          {
+            "name": "Lugoj",
+            "pop": 18,
+            "note": "municipiu, jud. Timiș"
+          },
+          {
+            "name": "Băile Herculane",
+            "pop": 14,
+            "alias": [
+              "herculane"
+            ],
+            "note": "oraș-stațiune balneară, jud. Caraș-Severin"
+          },
+          {
+            "name": "Caransebeș",
+            "pop": 10,
+            "note": "municipiu, jud. Caraș-Severin"
+          },
+          {
+            "name": "Salonta",
+            "pop": 6,
+            "note": "municipiu, jud. Bihor"
+          },
+          {
+            "name": "Beiuș",
+            "pop": 5,
+            "note": "municipiu, jud. Bihor"
+          },
+          {
+            "name": "Marghita",
+            "pop": 4,
+            "note": "municipiu, jud. Bihor"
+          },
+          {
+            "name": "Oravița",
+            "pop": 4,
+            "note": "oraș, jud. Caraș-Severin; cea mai veche clădire de teatru din România (1817)"
+          },
+          {
+            "name": "Anina",
+            "pop": 3,
+            "note": "oraș minier, jud. Caraș-Severin"
+          },
+          {
+            "name": "Bocșa",
+            "pop": 3,
+            "note": "oraș, jud. Caraș-Severin"
+          },
+          {
+            "name": "Jimbolia",
+            "pop": 3,
+            "note": "oraș, jud. Timiș, la frontiera cu Serbia"
+          },
+          {
+            "name": "Sânnicolau Mare",
+            "pop": 3,
+            "note": "oraș, jud. Timiș; cel mai vestic oraș al României"
+          },
+          {
+            "name": "Buziaș",
+            "pop": 3,
+            "note": "oraș-stațiune, jud. Timiș"
+          },
+          {
+            "name": "Curtici",
+            "pop": 3,
+            "note": "oraș, jud. Arad; punct de frontieră feroviar"
+          },
+          {
+            "name": "Moldova Nouă",
+            "pop": 2,
+            "note": "oraș, jud. Caraș-Severin, pe Dunăre"
+          },
+          {
+            "name": "Recaș",
+            "pop": 2,
+            "note": "oraș, jud. Timiș; centru viticol"
+          },
+          {
+            "name": "Nădlac",
+            "pop": 2,
+            "note": "oraș, jud. Arad, la frontiera cu Ungaria"
+          },
+          {
+            "name": "Ineu",
+            "pop": 2,
+            "note": "oraș, jud. Arad; cetatea Ineu"
+          },
+          {
+            "name": "Oțelu Roșu",
+            "pop": 2,
+            "note": "oraș, jud. Caraș-Severin"
+          },
+          {
+            "name": "Ștei",
+            "pop": 1,
+            "note": "oraș, jud. Bihor"
+          },
+          {
+            "name": "Vașcău",
+            "pop": 1,
+            "note": "oraș, jud. Bihor"
+          },
+          {
+            "name": "Valea lui Mihai",
+            "pop": 1,
+            "note": "oraș, jud. Bihor, la frontiera cu Ungaria"
+          }
+        ]
+      },
+    {
+        "id": "orase-maramures-bucovina",
+        "region": "maramures-bucovina",
+        "text": "Un oraș din județul Maramureș sau din județul Suceava",
+        "accepts": "Orașe din județul Maramureș sau din județul Suceava.",
+        "answers": [
+          {
+            "name": "Baia Mare",
+            "pop": 75,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Suceava",
+            "pop": 70,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Sighetu Marmației",
+            "pop": 55,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Rădăuți",
+            "pop": 42,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Câmpulung Moldovenesc",
+            "pop": 39,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Vatra Dornei",
+            "pop": 38,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Gura Humorului",
+            "pop": 32,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Siret",
+            "pop": 24,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Vișeu de Sus",
+            "pop": 25,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Borșa",
+            "pop": 24,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Fălticeni",
+            "pop": 22,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Baia Sprie",
+            "pop": 16,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Târgu Lăpuș",
+            "pop": 12,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Cavnic",
+            "pop": 10,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Săliștea de Sus",
+            "pop": 9,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Seini",
+            "pop": 8,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Solca",
+            "pop": 7,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Vicovu de Sus",
+            "pop": 5,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Șomcuta Mare",
+            "pop": 4,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Milișăuți",
+            "pop": 3,
+            "note": "Oraș în județul Suceava."
+          }
+        ]
+      },
+    {
+      "id": "lacuri-transilvania",
+      "region": "transilvania",
+      "text": "Un lac din Transilvania",
+      "accepts": "Orice lac natural sau de acumulare din Transilvania (jud. Cluj, Brașov, Sibiu, Mureș, Alba, Harghita, Covasna, Bistrița-Năsăud, Sălaj, Hunedoara)",
+      "answers": [
+        { "name": "Bâlea", "pop": 52, "alias": ["lacul bâlea"], "note": "lac glaciar la 2034 m în Munții Făgăraș, jud. Sibiu, la capătul Transfăgărășanului" },
+        { "name": "Lacul Roșu", "pop": 50, "alias": ["ghilcoș"], "note": "lac de baraj natural format în 1837, jud. Harghita, lângă Cheile Bicazului" },
+        { "name": "Lacul Ursu", "pop": 26, "alias": ["ursu"], "note": "cel mai mare lac heliotermic sărat din Europa, Sovata, jud. Mureș" },
+        { "name": "Sfânta Ana", "pop": 24, "alias": ["sf. ana"], "note": "singurul lac vulcanic din România, în craterul Ciomatu, jud. Harghita" },
+        { "name": "Bucura", "pop": 10, "note": "cel mai mare lac glaciar al României (~8,8 ha), Munții Retezat, jud. Hunedoara" },
+        { "name": "Tarnița", "pop": 8, "note": "lac de acumulare pe Someșul Cald, jud. Cluj" },
+        { "name": "Colibița", "pop": 6, "note": "lac de acumulare pe Bistrița, Munții Călimani, jud. Bistrița-Năsăud" },
+        { "name": "Fântânele", "pop": 5, "alias": ["beliș"], "note": "lac de acumulare Beliș-Fântânele pe Someșul Cald, jud. Cluj" },
+        { "name": "Oașa", "pop": 4, "note": "lac de acumulare pe râul Sebeș, Munții Șureanu, jud. Alba, pe Transalpina" },
+        { "name": "Lacul fără Fund", "pop": 4, "note": "lac sărat format în fosta salină de la Ocna Sibiului, jud. Sibiu; monument al naturii" },
+        { "name": "Zetea", "pop": 3, "note": "lac de acumulare pe Târnava Mare, jud. Harghita" },
+        { "name": "Cinciș", "pop": 3, "note": "lac de acumulare pe râul Cerna, lângă Hunedoara, jud. Hunedoara" },
+        { "name": "Gilău", "pop": 2, "note": "lac de acumulare pe Someșul Mic, jud. Cluj" },
+        { "name": "Drăgan", "pop": 2, "note": "lac de acumulare în Munții Vlădeasa, jud. Cluj, la limita cu Bihor" },
+        { "name": "Zănoaga", "pop": 2, "note": "cel mai adânc lac glaciar din România (29 m), Munții Retezat, jud. Hunedoara" },
+        { "name": "Gura Apelor", "pop": 2, "note": "lac de acumulare pe Râul Mare, sub Retezat, jud. Hunedoara" },
+        { "name": "Bezid", "pop": 1, "note": "lac de acumulare în jud. Mureș, pe valea Cușmedului" },
+        { "name": "Iezerul Ighiel", "pop": 1, "alias": ["lacul ighiel"], "note": "lac natural de baraj în Munții Trascău, jud. Alba" },
+        { "name": "Galeșu", "pop": 1, "note": "lac glaciar în Munții Retezat, jud. Hunedoara" },
+        { "name": "Avrig", "pop": 1, "note": "lac glaciar în Munții Făgăraș, deasupra Avrigului, jud. Sibiu" }
+      ]
+    }
+  ]
+}
