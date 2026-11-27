@@ -3,6 +3,7 @@ import 'server-only'
 import oneDecembrie from '@/content/games/1-decembrie.json'
 import geografie from '@/content/games/geografie.json'
 import istorie from '@/content/games/istorie.json'
+import limbaMeme from '@/content/games/limba-meme.json'
 import mancareTraditii from '@/content/games/mancare-traditii.json'
 import muzicaFilm from '@/content/games/muzica-film.json'
 import sport from '@/content/games/sport.json'
@@ -38,8 +39,9 @@ const BANKS: Partial<Record<GameId, Bank>> = {
   'muzica-film': muzicaFilm as Bank,
   'mancare-traditii': mancareTraditii as Bank,
   sport: sport as Bank,
-  // Add a line per pack as its bank is drafted and reviewed. A game with no
-  // bank shows as "în curând" rather than 404ing.
+  'limba-meme': limbaMeme as Bank,
+  // All seven drafted. A game with no bank would show as "în curând" rather
+  // than 404ing, which is how the packs appeared while they were being written.
 }
 
 /** Indices are built once per process, never per request or keystroke. */

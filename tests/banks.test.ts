@@ -50,9 +50,7 @@ describe('bank inventory', () => {
     }
   })
 
-  // Enable before launch: all seven must ship. Until then this would make the
-  // suite permanently red, which trains everyone to ignore it.
-  it.skip('all seven games have a bank', () => {
+  it('all seven games have a bank', () => {
     expect(missing, `still to draft: ${missing.join(', ')}`).toEqual([])
   })
 })
