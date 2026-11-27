@@ -1,26 +1,19 @@
 import { getReveal } from '@/lib/bank.server'
+import { readSession } from '@/lib/session.server'
 import { isGameId } from '@/lib/types'
 
-/**
- * Every accepted answer for a game, with its points.
- *
- * Deliberately unguarded, and the plan says so explicitly: with no accounts
- * there is nothing to authenticate against, and with no leaderboard a player
- * who fetches this early has only spoiled their own game. One bank being read
- * does not expose the other six. It is kept out of the sitemap and disallowed
- * in robots.txt so it never reaches search results.
- *
- * Aliases and reviewer notes are stripped by `getReveal` — the aliases would
- * hand out a normalisation cheat sheet.
- */
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ gameId: string }> },
 ) {
   const { gameId } = await params
 
   if (!isGameId(gameId)) {
     return Response.json({ error: 'unknown game' }, { status: 404 })
+  }
+
+  if (readSession(request, gameId)?.index !== 7) {
+    return Response.json({ error: 'finish game first' }, { status: 403 })
   }
 
   const reveal = getReveal(gameId)

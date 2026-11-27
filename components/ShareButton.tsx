@@ -83,7 +83,7 @@ export function ShareButton({ gameTitle, score, tiers, packsDone }: Props) {
       >
         Distribuie rezultatul
       </button>
-      <span role="status" className="min-h-4 text-center text-xs text-muted">
+      <span role="status" className={copied || failed ? 'text-center text-xs text-muted' : 'sr-only'}>
         {copied && 'Copiat! Lipește-l unde vrei.'}
         {failed && 'Nu am putut copia. Selectează textul de mai sus manual.'}
       </span>

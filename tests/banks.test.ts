@@ -28,6 +28,7 @@ const FUZZY_MIN_LENGTH = 6
 const files = readdirSync(GAMES_DIR).filter((f) => f.endsWith('.json'))
 
 const banks = new Map<GameId, Bank>()
+const facts = JSON.parse(readFileSync(join(import.meta.dirname, '../content/answer-facts.json'), 'utf8')) as Record<string, Record<string, Record<string, string>>>
 for (const file of files) {
   const bank = JSON.parse(readFileSync(join(GAMES_DIR, file), 'utf8')) as Bank
   banks.set(bank.id, bank)
@@ -73,6 +74,12 @@ describe.each(present)('%s', (gameId) => {
   it('has unique prompt ids', () => {
     const ids = bank.prompts.map((p) => p.id)
     expect(new Set(ids).size, `duplicate prompt id in ${ids.join(', ')}`).toBe(ids.length)
+  })
+
+  it('has a player-facing fact for every accepted answer', () => {
+    for (const prompt of bank.prompts) for (const answer of prompt.answers) {
+      expect(facts[gameId]?.[prompt.id]?.[answer.name]?.trim(), `${prompt.id}: ${answer.name}`).toBeTruthy()
+    }
   })
 
   it('states an acceptance boundary for every prompt', () => {

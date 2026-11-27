@@ -1,6 +1,7 @@
 import 'server-only'
 
 import oneDecembrie from '@/content/games/1-decembrie.json'
+import answerFacts from '@/content/answer-facts.json'
 import geografie from '@/content/games/geografie.json'
 import istorie from '@/content/games/istorie.json'
 import limbaMeme from '@/content/games/limba-meme.json'
@@ -10,6 +11,7 @@ import sport from '@/content/games/sport.json'
 import { buildPromptIndex, matchAnswer, type PromptIndex } from '@/lib/match'
 import { popToPoints, pointsToTier } from '@/lib/score'
 import {
+  GAME_IDS,
   MAX_ACCEPTED_ELAPSED_MS,
   type Bank,
   type ClientPrompt,
@@ -62,7 +64,7 @@ export function isPlayable(gameId: GameId): boolean {
 }
 
 export function playableGameIds(): GameId[] {
-  return Object.keys(BANKS) as GameId[]
+  return GAME_IDS.filter((id) => isPlayable(id))
 }
 
 /**
@@ -141,10 +143,9 @@ export function getReveal(gameId: GameId) {
       id: prompt.id,
       region: prompt.region,
       text: prompt.text,
-      // `note` and `alias` stay server-side: the notes are reviewer evidence,
-      // and the aliases would hand out a normalisation cheat sheet.
+      // Reviewer notes and aliases remain private. Player-facing facts are curated separately.
       answers: prompt.answers
-        .map((a) => ({ name: a.name, points: popToPoints(a.pop) }))
+        .map((a) => ({ name: a.name, points: popToPoints(a.pop), fact: (answerFacts as Record<string, Record<string, Record<string, string>>>)[gameId]?.[prompt.id]?.[a.name] }))
         .sort((a, b) => a.points - b.points || a.name.localeCompare(b.name, 'ro')),
     })),
   }

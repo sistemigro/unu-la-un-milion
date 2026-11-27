@@ -202,7 +202,7 @@
     {
       "id": "personalitati-marea-unire",
       "region": "transilvania",
-      "text": "O personalitate a Marii Uniri de la 1918",
+      "text": "Numește o persoană care a avut un rol în Marea Unire din 1918",
       "accepts": "Orice persoană cu rol direct în actele Unirii din 1918 (Alba Iulia, Cernăuți, Chișinău) sau în recunoașterea lor: fruntaș unionist, delegat, membru al consiliilor naționale ori al guvernului, suveran",
       "answers": [
         { "name": "Ferdinand I", "pop": 56, "alias": ["regele ferdinand", "ferdinand întregitorul"], "note": "rege al României 1914–27; „Ferdinand Întregitorul”, a sancționat unirea" },

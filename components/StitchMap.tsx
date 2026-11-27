@@ -49,6 +49,7 @@ type Props = {
   /** The region about to be played — outlined, so you see what you will sew. */
   highlight?: RegionId
   className?: string
+  outlines?: boolean
 }
 
 /** Unstitched cloth: the printed pattern showing through, not a tier colour. */
@@ -64,7 +65,7 @@ function describe(tiers: Partial<Record<RegionId, Tier>>): string {
   return `Harta României: ${parts.join(', ')}${tail}`
 }
 
-export function StitchMap({ tiers = {}, highlight, className }: Props) {
+export function StitchMap({ tiers = {}, highlight, className, outlines = false }: Props) {
   return (
     <svg
       viewBox={`0 0 ${MAP_COLS} ${MAP_ROWS}`}
@@ -88,6 +89,10 @@ export function StitchMap({ tiers = {}, highlight, className }: Props) {
 
       {/* One texture pass over every cell, rather than per region. */}
       <path d={ALL_CELLS_PATH} fill={`url(#${STITCH_PATTERN_ID})`} />
+
+      {outlines && REGION_IDS.map((region) => (
+        <path key={region} d={REGION_OUTLINES[region]} fill="none" stroke="#8c7b62" strokeWidth="0.3" />
+      ))}
 
       {highlight && (
         <path

@@ -1,5 +1,6 @@
-import { checkAnswer } from '@/lib/bank.server'
+import { getClientPrompts, checkAnswer } from '@/lib/bank.server'
 import { logAnswer } from '@/lib/log.server'
+import { readSession, sessionCookie } from '@/lib/session.server'
 import { MAX_ANSWER_LENGTH, isGameId, type CheckRequest } from '@/lib/types'
 
 // Route handlers already run on Node unless they opt into edge, and declaring
@@ -54,6 +55,11 @@ export async function POST(request: Request) {
     return json({ error: 'missing elapsed time' }, 400)
   }
 
+  const session = readSession(request, gameId)
+  if (!session || getClientPrompts(gameId)?.[session.index]?.id !== promptId) {
+    return json({ error: 'question unavailable' }, 403)
+  }
+
   // Truncate rather than reject: a long paste is a player being playful, not an
   // error worth showing them. Nothing downstream needs more than this.
   const submitted = answer.slice(0, MAX_ANSWER_LENGTH)
@@ -72,5 +78,8 @@ export async function POST(request: Request) {
     elapsedMs: Math.round(elapsedMs),
   })
 
-  return json(result)
+  return Response.json(result, { headers: {
+    'cache-control': 'no-store',
+    ...(result.matched ? { 'set-cookie': sessionCookie({ ...session, resolved: true }) } : {}),
+  } })
 }

@@ -38,7 +38,7 @@ export function PackList({ main, packs }: { main: PackMeta; packs: PackMeta[] })
   const done = mounted ? Object.keys(progress).length : 0
 
   const tiersOf = (saved?: GameProgress): Partial<Record<RegionId, Tier>> =>
-    Object.fromEntries((saved?.results ?? []).map((r) => [r.region, r.tier]))
+    Object.fromEntries((saved?.latestResults ?? saved?.results ?? []).map((r) => [r.region, r.tier]))
 
   const mainSaved = get(main.id)
 
@@ -64,14 +64,14 @@ export function PackList({ main, packs }: { main: PackMeta; packs: PackMeta[] })
         </div>
         <div className="flex flex-col gap-2.5 px-4 pt-3.5 pb-4">
           <h2 className="font-display text-[26px] font-bold">{main.title}</h2>
-          <StitchMap className="w-full" tiers={tiersOf(mainSaved)} />
+          <StitchMap className="w-full" tiers={tiersOf(mainSaved)} outlines />
           {mainSaved ? (
             <p className="text-sm">
-              <strong>{mainSaved.score}</strong> / {MAX_SCORE} ·{' '}
+              Scor: <strong>{mainSaved.score}</strong> / {MAX_SCORE} ·{' '}
               {totalToTitle(mainSaved.score)}
             </p>
           ) : (
-            <p className="text-sm">7 întrebări · 20 de secunde fiecare · un scor oficial</p>
+            <p className="text-sm">7 întrebări · 20 de secunde fiecare · un scor</p>
           )}
           <Link
             href={`/joc/${main.id}`}
@@ -79,6 +79,7 @@ export function PackList({ main, packs }: { main: PackMeta; packs: PackMeta[] })
           >
             {mainSaved ? 'Rejoacă' : 'Începe'}
           </Link>
+          {mainSaved && <Link href={`/joc/${main.id}/raspunsuri`} className="border-2 px-2 py-2 text-center text-sm font-bold">Cu detalii</Link>}
           <p className="text-xs leading-snug text-muted">
             Aceleași întrebări pentru toată lumea, ca să vă puteți compara scorurile.
           </p>
@@ -97,12 +98,12 @@ export function PackList({ main, packs }: { main: PackMeta; packs: PackMeta[] })
                 <h3 className="font-display min-h-11 text-base leading-snug font-semibold">
                   {pack.title}
                 </h3>
-                <StitchMap className="w-full" tiers={tiersOf(saved)} />
+                <StitchMap className="w-full" tiers={tiersOf(saved)} outlines />
                 {!pack.playable ? (
                   <p className="text-xs text-muted">În curând</p>
                 ) : saved ? (
                   <p className="text-xs">
-                    <strong>{saved.score}</strong> / {MAX_SCORE} · {totalToTitle(saved.score)}
+                    Scor: <strong>{saved.score}</strong> / {MAX_SCORE} · {totalToTitle(saved.score)}
                   </p>
                 ) : (
                   <p className="text-xs">Nou · 7 întrebări</p>
@@ -121,6 +122,7 @@ export function PackList({ main, packs }: { main: PackMeta; packs: PackMeta[] })
                     Curând
                   </span>
                 )}
+                {saved && pack.playable && <Link href={`/joc/${pack.id}/raspunsuri`} className="border-2 px-2 py-2 text-center text-[13px] font-bold">Cu detalii</Link>}
               </article>
             )
           })}

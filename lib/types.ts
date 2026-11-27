@@ -71,7 +71,6 @@ export const TIER_SQUARE: Record<Tier, string> = {
 
 export const PROMPTS_PER_GAME = 7
 export const MAX_SCORE = 700
-export const PREVIEW_MS = 3_000
 export const ANSWER_MS = 20_000
 /** Server-side clamp: anything slower than this scores nothing. */
 export const MAX_ACCEPTED_ELAPSED_MS = 21_000

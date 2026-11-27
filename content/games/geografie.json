@@ -123,59 +123,249 @@
       ]
     },
     {
-      "id": "pesteri-banat-crisana",
-      "region": "banat-crisana",
-      "text": "O peșteră, o cheie sau o cascadă din Banat ori Crișana",
-      "accepts": "Orice peșteră, chei/defileu sau cascadă aflată în Banat ori Crișana (jud. Caraș-Severin, Timiș, Arad, Bihor)",
-      "answers": [
-        { "name": "Peștera Urșilor", "pop": 54, "alias": ["urșilor"], "note": "Chișcău, jud. Bihor; descoperită în 1975, cu schelete de urs de peșteră" },
-        { "name": "Cascada Bigăr", "pop": 50, "alias": ["bigăr"], "note": "Valea Minișului, jud. Caraș-Severin, la paralela 45; s-a surpat parțial în 2021" },
-        { "name": "Cazanele Dunării", "pop": 26, "alias": ["cazane"], "note": "defileul Dunării între Munții Almăj și Miroč, jud. Caraș-Severin/Mehedinți" },
-        { "name": "Cheile Nerei", "pop": 20, "note": "Parcul Național Cheile Nerei-Beușnița, jud. Caraș-Severin" },
-        { "name": "Cascada Beușnița", "pop": 16, "alias": ["beușnița"], "note": "jud. Caraș-Severin, în Parcul Național Cheile Nerei-Beușnița" },
-        { "name": "Cetățile Ponorului", "pop": 12, "alias": ["cetatea ponorului"], "note": "complex carstic din Padiș, jud. Bihor, Munții Bihor" },
-        { "name": "Peștera Vântului", "pop": 8, "note": "Șuncuiuș, jud. Bihor; cea mai lungă peșteră din România (peste 50 km)" },
-        { "name": "Peștera Meziad", "pop": 6, "note": "com. Remetea, jud. Bihor; una dintre primele peșteri amenajate din țară" },
-        { "name": "Cheile Carașului", "pop": 5, "note": "Parcul Național Semenic-Cheile Carașului, jud. Caraș-Severin" },
-        { "name": "Peștera Coliboaia", "pop": 2, "note": "jud. Bihor; cele mai vechi picturi rupestre cunoscute din Europa Centrală" },
-        { "name": "Peștera Comarnic", "pop": 2, "note": "Cheile Carașului, jud. Caraș-Severin; peșteră cu concrețiuni, rezervație" },
-        { "name": "Peștera Românești", "pop": 2, "note": "jud. Timiș, Munții Poiana Ruscă; găzduiește concerte de muzică clasică" },
-        { "name": "Cheile Minișului", "pop": 2, "note": "jud. Caraș-Severin, pe râul Miniș, în Munții Aninei" },
-        { "name": "Cascada Iadolina", "pop": 2, "note": "Valea Iadei, jud. Bihor, în apropierea lacului Leșu" },
-        { "name": "Peștera Buhui", "pop": 1, "note": "lângă Anina, jud. Caraș-Severin; traversată de râul subteran Buhui" },
-        { "name": "Cheile Rudăriei", "pop": 1, "note": "Eftimie Murgu, jud. Caraș-Severin; cunoscute pentru morile de apă" },
-        { "name": "Cheile Crișului Repede", "pop": 1, "note": "defileul de la Vadu Crișului-Șuncuiuș, jud. Bihor" },
-        { "name": "Peștera Ungurului", "pop": 1, "note": "Șuncuiuș, jud. Bihor, pe valea Crișului Repede" },
-        { "name": "Peștera Vadu Crișului", "pop": 1, "note": "jud. Bihor, în defileul Crișului Repede; peșteră amenajată" },
-        { "name": "Cheile Gârliștei", "pop": 1, "note": "jud. Caraș-Severin, pe râul Gârliște, lângă Anina" }
-      ]
-    },
+        "id": "orase-banat-crisana",
+        "region": "banat-crisana",
+        "text": "Un oraș din Banat sau Crișana",
+        "accepts": "Orice oraș sau municipiu din Banat ori Crișana, adică din județele Timiș, Caraș-Severin, Arad și Bihor",
+        "answers": [
+          {
+            "name": "Timișoara",
+            "pop": 82,
+            "note": "municipiu, jud. Timiș; capitala istorică a Banatului"
+          },
+          {
+            "name": "Oradea",
+            "pop": 64,
+            "note": "municipiu, reședința jud. Bihor"
+          },
+          {
+            "name": "Arad",
+            "pop": 56,
+            "note": "municipiu, reședința jud. Arad"
+          },
+          {
+            "name": "Reșița",
+            "pop": 30,
+            "note": "municipiu, reședința jud. Caraș-Severin; centru siderurgic"
+          },
+          {
+            "name": "Lugoj",
+            "pop": 18,
+            "note": "municipiu, jud. Timiș"
+          },
+          {
+            "name": "Băile Herculane",
+            "pop": 14,
+            "alias": [
+              "herculane"
+            ],
+            "note": "oraș-stațiune balneară, jud. Caraș-Severin"
+          },
+          {
+            "name": "Caransebeș",
+            "pop": 10,
+            "note": "municipiu, jud. Caraș-Severin"
+          },
+          {
+            "name": "Salonta",
+            "pop": 6,
+            "note": "municipiu, jud. Bihor"
+          },
+          {
+            "name": "Beiuș",
+            "pop": 5,
+            "note": "municipiu, jud. Bihor"
+          },
+          {
+            "name": "Marghita",
+            "pop": 4,
+            "note": "municipiu, jud. Bihor"
+          },
+          {
+            "name": "Oravița",
+            "pop": 4,
+            "note": "oraș, jud. Caraș-Severin; cea mai veche clădire de teatru din România (1817)"
+          },
+          {
+            "name": "Anina",
+            "pop": 3,
+            "note": "oraș minier, jud. Caraș-Severin"
+          },
+          {
+            "name": "Bocșa",
+            "pop": 3,
+            "note": "oraș, jud. Caraș-Severin"
+          },
+          {
+            "name": "Jimbolia",
+            "pop": 3,
+            "note": "oraș, jud. Timiș, la frontiera cu Serbia"
+          },
+          {
+            "name": "Sânnicolau Mare",
+            "pop": 3,
+            "note": "oraș, jud. Timiș; cel mai vestic oraș al României"
+          },
+          {
+            "name": "Buziaș",
+            "pop": 3,
+            "note": "oraș-stațiune, jud. Timiș"
+          },
+          {
+            "name": "Curtici",
+            "pop": 3,
+            "note": "oraș, jud. Arad; punct de frontieră feroviar"
+          },
+          {
+            "name": "Moldova Nouă",
+            "pop": 2,
+            "note": "oraș, jud. Caraș-Severin, pe Dunăre"
+          },
+          {
+            "name": "Recaș",
+            "pop": 2,
+            "note": "oraș, jud. Timiș; centru viticol"
+          },
+          {
+            "name": "Nădlac",
+            "pop": 2,
+            "note": "oraș, jud. Arad, la frontiera cu Ungaria"
+          },
+          {
+            "name": "Ineu",
+            "pop": 2,
+            "note": "oraș, jud. Arad; cetatea Ineu"
+          },
+          {
+            "name": "Oțelu Roșu",
+            "pop": 2,
+            "note": "oraș, jud. Caraș-Severin"
+          },
+          {
+            "name": "Ștei",
+            "pop": 1,
+            "note": "oraș, jud. Bihor"
+          },
+          {
+            "name": "Vașcău",
+            "pop": 1,
+            "note": "oraș, jud. Bihor"
+          },
+          {
+            "name": "Valea lui Mihai",
+            "pop": 1,
+            "note": "oraș, jud. Bihor, la frontiera cu Ungaria"
+          }
+        ]
+      },
     {
-      "id": "munti-maramures-bucovina",
-      "region": "maramures-bucovina",
-      "text": "Un masiv montan din Maramureș sau Bucovina",
-      "accepts": "Orice masiv, culme sau grupă montană aflată total ori parțial în Maramureș sau Bucovina (jud. Maramureș și Suceava)",
-      "answers": [
-        { "name": "Munții Rodnei", "pop": 52, "alias": ["rodna"], "note": "cel mai înalt masiv al Carpaților Orientali, vf. Pietrosul Rodnei 2303 m" },
-        { "name": "Rarău", "pop": 50, "note": "masiv în Bucovina, jud. Suceava, cu stâncile Pietrele Doamnei (1651 m)" },
-        { "name": "Munții Maramureșului", "pop": 30, "note": "pe granița cu Ucraina, vf. Farcău 1957 m, jud. Maramureș" },
-        { "name": "Călimani", "pop": 24, "note": "masiv vulcanic, vf. Pietrosul Călimanilor 2100 m; versantul nordic în jud. Suceava" },
-        { "name": "Obcinele Bucovinei", "pop": 20, "alias": ["obcine"], "note": "Obcina Mare, Obcina Feredeu și Obcina Mestecăniș, jud. Suceava" },
-        { "name": "Giumalău", "pop": 14, "note": "masiv cristalin, vf. Giumalău 1857 m, jud. Suceava" },
-        { "name": "Gutâi", "pop": 12, "alias": ["gutin"], "note": "masiv vulcanic, jud. Maramureș, vf. Gutâiul Doamnei 1443 m" },
-        { "name": "Igniș", "pop": 8, "note": "masiv vulcanic, jud. Maramureș, altitudine maximă 1307 m" },
-        { "name": "Țibleș", "pop": 6, "note": "jud. Maramureș și Bistrița-Năsăud, vf. Bran 1839 m" },
-        { "name": "Suhard", "pop": 5, "note": "jud. Suceava și Bistrița-Năsăud, vf. Omu 1932 m" },
-        { "name": "Munții Bistriței", "pop": 3, "note": "jud. Suceava și Neamț, vf. Budacu 1859 m" },
-        { "name": "Munții Stânișoarei", "pop": 3, "alias": ["stânișoara"], "note": "jud. Suceava și Neamț, vf. Bivolu 1530 m" },
-        { "name": "Munții Lăpușului", "pop": 2, "alias": ["lăpuș"], "note": "jud. Maramureș, între Someș și depresiunea Lăpușului" },
-        { "name": "Obcina Mare", "pop": 2, "note": "cea mai estică obcină a Bucovinei, jud. Suceava" },
-        { "name": "Obcina Mestecăniș", "pop": 2, "alias": ["mestecăniș"], "note": "obcină între Câmpulung Moldovenesc și Vatra Dornei, jud. Suceava" },
-        { "name": "Munții Bârgăului", "pop": 2, "alias": ["bârgău"], "note": "jud. Bistrița-Năsăud, la limita Bucovinei, spre Pasul Tihuța" },
-        { "name": "Munții Preluca", "pop": 1, "alias": ["preluca"], "note": "masiv cristalin scund, jud. Maramureș, între Lăpuș și Someș" },
-        { "name": "Munții Oașului", "pop": 1, "alias": ["oaș"], "note": "masiv vulcanic la nord-vest de Igniș, jud. Satu Mare și Maramureș" }
-      ]
-    },
+        "id": "orase-maramures-bucovina",
+        "region": "maramures-bucovina",
+        "text": "Un oraș din județul Maramureș sau din județul Suceava",
+        "accepts": "Orașe din județul Maramureș sau din județul Suceava.",
+        "answers": [
+          {
+            "name": "Baia Mare",
+            "pop": 75,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Suceava",
+            "pop": 70,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Sighetu Marmației",
+            "pop": 55,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Rădăuți",
+            "pop": 42,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Câmpulung Moldovenesc",
+            "pop": 39,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Vatra Dornei",
+            "pop": 38,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Gura Humorului",
+            "pop": 32,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Siret",
+            "pop": 24,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Vișeu de Sus",
+            "pop": 25,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Borșa",
+            "pop": 24,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Fălticeni",
+            "pop": 22,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Baia Sprie",
+            "pop": 16,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Târgu Lăpuș",
+            "pop": 12,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Cavnic",
+            "pop": 10,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Săliștea de Sus",
+            "pop": 9,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Seini",
+            "pop": 8,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Solca",
+            "pop": 7,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Vicovu de Sus",
+            "pop": 5,
+            "note": "Oraș în județul Suceava."
+          },
+          {
+            "name": "Șomcuta Mare",
+            "pop": 4,
+            "note": "Oraș în județul Maramureș."
+          },
+          {
+            "name": "Milișăuți",
+            "pop": 3,
+            "note": "Oraș în județul Suceava."
+          }
+        ]
+      },
     {
       "id": "lacuri-transilvania",
       "region": "transilvania",

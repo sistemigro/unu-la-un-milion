@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Pixelify_Sans, Space_Grotesk } from 'next/font/google'
 import Link from 'next/link'
 import './globals.css'
+import { SistemigroPromo } from '@/components/SistemigroPromo'
 
 /**
  * `latin-ext` is what carries U+0218–021B (Șș Țț). Without it every Romanian
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
 /** The ia-style tricolour stripe that tops and tails every screen. */
 function Tricolour() {
   return (
-    <div className="flex h-1.5" aria-hidden="true">
+    <div className="flex h-1.5 shrink-0" aria-hidden="true">
       <div className="flex-1 bg-blue" />
       <div className="flex-1 bg-yellow" />
       <div className="flex-1 bg-action" />
@@ -60,22 +61,12 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <Tricolour />
         <main className="mx-auto w-full max-w-[430px] flex-1">{children}</main>
         <footer className="mx-auto w-full max-w-[430px] border-t-2 px-5 pt-4 pb-5 text-[13px]">
-          <nav aria-label="Pagini" className="flex flex-wrap gap-4">
+          <nav aria-label="Pagini" className="flex flex-wrap justify-center gap-4">
             <Link href="/cum-se-joaca">Cum se joacă</Link>
             <Link href="/despre">Despre</Link>
             <Link href="/confidentialitate">Confidențialitate</Link>
           </nav>
-          <p className="mt-2.5">
-            Făcut de{' '}
-            <a
-              href="https://sistemigro.com?utm_source=unul-la-un-milion&utm_medium=footer"
-              target="_blank"
-              rel="noopener"
-            >
-              Sistemigro
-            </a>{' '}
-            pentru 1 Decembrie
-          </p>
+          <SistemigroPromo />
         </footer>
         <Tricolour />
       </body>

@@ -6,7 +6,7 @@
     {
       "id": "cuvinte-regionale",
       "region": "oltenia",
-      "text": "Un cuvânt regional românesc pentru un lucru de zi cu zi",
+      "text": "Spune un cuvânt folosit într-o anumită regiune a României pentru un aliment, un obiect sau o altă noțiune de zi cu zi.",
       "accepts": "Orice cuvânt regional sau dialectal românesc care denumește un obiect, un aliment sau o noțiune din viața de zi cu zi și e marcat ca regionalism în DEX; se cere cuvântul regional, nu corespondentul literar.",
       "answers": [
         { "name": "Cucuruz", "pop": 52, "alias": ["cucuruzi"], "note": "porumb; Banat, Transilvania, Bucovina; din sb./ucr. kukuruz" },
@@ -71,39 +71,155 @@
       ]
     },
     {
-      "id": "turcisme",
-      "region": "dobrogea",
-      "text": "Un cuvânt din limba română împrumutat din turcă",
-      "accepts": "Orice cuvânt din româna actuală pentru care DEX dă etimologie turcă (otomană), inclusiv împrumuturile intrate prin filieră turcă din arabă sau persană.",
-      "answers": [
-        { "name": "Ciorbă", "pop": 55, "alias": ["ciorbe"], "note": "din tc. çorba; termenul a intrat și în bulgară și sârbă din turcă" },
-        { "name": "Sarma", "pop": 50, "alias": ["sarmale"], "note": "din tc. sarma „înfășurat”, de la sarmak „a înfășura”" },
-        { "name": "Cafea", "pop": 42, "note": "din tc. kahve, la origine din ar. qahwa" },
-        { "name": "Iaurt", "pop": 36, "note": "din tc. yoğurt" },
-        { "name": "Chiftea", "pop": 32, "alias": ["chiftele"], "note": "din tc. köfte, la origine din persană" },
-        { "name": "Baclava", "pop": 30, "alias": ["baclavale"], "note": "din tc. baklava" },
-        { "name": "Musaca", "pop": 26, "alias": ["musacale"], "note": "din tc. musakka, la origine din arabă" },
-        { "name": "Halva", "pop": 24, "alias": ["halvale"], "note": "din tc. helva, la origine din ar. halwa „dulce”" },
-        { "name": "Murdar", "pop": 22, "note": "din tc. murdar „necurat”, la origine persan" },
-        { "name": "Pilaf", "pop": 20, "alias": ["pilafuri"], "note": "din tc. pilav" },
-        { "name": "Chef", "pop": 18, "alias": ["chefuri"], "note": "din tc. keyif „bună dispoziție, plăcere”" },
-        { "name": "Tavan", "pop": 16, "alias": ["tavane"], "note": "din tc. tavan" },
-        { "name": "Musafir", "pop": 15, "alias": ["musafiri"], "note": "din tc. misafir „oaspete”, la origine din arabă" },
-        { "name": "Papuc", "pop": 14, "alias": ["papuci"], "note": "din tc. pabuç, la origine din persană" },
-        { "name": "Dulap", "pop": 13, "alias": ["dulapuri"], "note": "din tc. dolap" },
-        { "name": "Geam", "pop": 12, "alias": ["geamuri"], "note": "din tc. cam „sticlă”" },
-        { "name": "Tutun", "pop": 10, "note": "din tc. tütün „fum, tabac”" },
-        { "name": "Mahala", "pop": 9, "alias": ["mahalale"], "note": "din tc. mahalle „cartier”, la origine din arabă" },
-        { "name": "Maidan", "pop": 8, "alias": ["maidane"], "note": "din tc. meydan „piață, loc deschis”" },
-        { "name": "Pastramă", "pop": 8, "alias": ["pastrama"], "note": "din tc. pastırma „carne presată”" },
-        { "name": "Caimac", "pop": 6, "alias": ["caimacuri"], "note": "din tc. kaymak „smântână, spumă”; și spuma cafelei turcești" },
-        { "name": "Cherestea", "pop": 5, "note": "din tc. kereste „material de construcție din lemn”" },
-        { "name": "Tejghea", "pop": 4, "alias": ["tejghele"], "note": "din tc. tezgâh „bancul meșteșugarului”, la origine din persană" },
-        { "name": "Basma", "pop": 3, "alias": ["basmale"], "note": "din tc. basma „pânză imprimată”" },
-        { "name": "Iatac", "pop": 3, "alias": ["iatacuri"], "note": "dormitor mic, cameră de culcare; din tc. yatak „pat, culcuș”" },
-        { "name": "Sacâz", "pop": 2, "note": "rezină de conifer folosită la arcușuri; din tc. sakız" }
-      ]
-    },
+        "id": "cuvinte-deserturi",
+        "region": "dobrogea",
+        "text": "Spune numele unui desert tradițional românesc",
+        "accepts": "Orice dulce din bucătăria tradițională românească: cozonaci, plăcinte, prăjituri de casă, dulcețuri și dulciuri rituale de sărbătoare. Nu se acceptă deserturi moderne de cofetărie fără rădăcină tradițională.",
+        "answers": [
+          {
+            "name": "Cozonac",
+            "pop": 78,
+            "note": "aluat dulce cu nucă, mac sau rahat; se face de Crăciun și de Paște în toată țara"
+          },
+          {
+            "name": "Papanași",
+            "pop": 54,
+            "note": "gogoși din brânză de vaci, cu smântână și dulceață; specialitate bucovineană și moldovenească"
+          },
+          {
+            "name": "Plăcintă cu brânză",
+            "pop": 46,
+            "note": "foi de aluat cu brânză de vaci dulce; se coace sau se prăjește, răspândită în toată țara"
+          },
+          {
+            "name": "Clătite",
+            "pop": 40,
+            "alias": [
+              "clătite cu brânză"
+            ],
+            "note": "foi subțiri umplute cu brânză dulce, gem sau magiun; desert de casă"
+          },
+          {
+            "name": "Gogoși",
+            "pop": 36,
+            "note": "aluat dospit prăjit în ulei, pudrat cu zahăr; desert de casă"
+          },
+          {
+            "name": "Pască",
+            "pop": 34,
+            "note": "cozonac rotund cu umplutură de brânză dulce și stafide; se face exclusiv de Paște"
+          },
+          {
+            "name": "Cornulețe",
+            "pop": 22,
+            "note": "aluat fraged cu untură sau smântână, umplut cu magiun, rahat sau nucă"
+          },
+          {
+            "name": "Orez cu lapte",
+            "pop": 22,
+            "note": "orez fiert în lapte, cu scorțișoară; desert simplu de iarnă"
+          },
+          {
+            "name": "Lapte de pasăre",
+            "pop": 20,
+            "note": "găluște de albuș fierte în lapte, cu sos de gălbenuș și vanilie"
+          },
+          {
+            "name": "Plăcintă cu dovleac",
+            "pop": 18,
+            "note": "umplutură de dovleac ras cu zahăr și scorțișoară; desert de toamnă, frecvent în Moldova"
+          },
+          {
+            "name": "Chec",
+            "pop": 18,
+            "note": "prăjitură simplă la tavă, adesea marmorată cu cacao; desert de casă"
+          },
+          {
+            "name": "Halva",
+            "pop": 16,
+            "note": "pastă de semințe de floarea-soarelui sau susan; de origine orientală, intrată în bucătăria românească prin Dobrogea și sudul țării"
+          },
+          {
+            "name": "Plăcintă cu mere",
+            "pop": 16,
+            "note": "mere rase cu zahăr și scorțișoară între foi de aluat; desert de toamnă"
+          },
+          {
+            "name": "Magiun de prune",
+            "pop": 14,
+            "note": "prune fierte lung fără zahăr, folosite ca umplutură sau mâncate cu pâine; Muntenia și Argeș (Topoloveni)"
+          },
+          {
+            "name": "Găluște cu prune",
+            "pop": 14,
+            "alias": [
+              "gomboți cu prune"
+            ],
+            "note": "aluat de cartofi cu prună întreagă, fiert și tăvălit în pesmet; Transilvania și Banat"
+          },
+          {
+            "name": "Brânzoaice",
+            "pop": 12,
+            "alias": [
+              "poale în brâu"
+            ],
+            "note": "pateuri moldovenești din aluat dospit cu brânză de vaci dulce, cu colțurile împăturite"
+          },
+          {
+            "name": "Mucenici",
+            "pop": 12,
+            "note": "figuri de aluat în formă de 8, fierte în sirop cu nucă în Moldova și coapte în Muntenia; se fac pe 9 martie"
+          },
+          {
+            "name": "Pandișpan",
+            "pop": 10,
+            "note": "pandișpan din ouă, zahăr și făină, adesea cu fructe; prăjitură de casă"
+          },
+          {
+            "name": "Cremșnit",
+            "pop": 8,
+            "note": "cremă de vanilie între foi de aluat; desert de patiserie preluat din bucătăria austriacă, tradițional în Transilvania"
+          },
+          {
+            "name": "Șerbet",
+            "pop": 6,
+            "note": "pastă dulce de fructe sau zahăr, servită cu apă rece; moștenire orientală păstrată în Dobrogea și în sudul țării"
+          },
+          {
+            "name": "Minciunele",
+            "pop": 4,
+            "alias": [
+              "uscățele"
+            ],
+            "note": "fâșii de aluat răsucite, prăjite și pudrate cu zahăr; nume diferite de la o regiune la alta"
+          },
+          {
+            "name": "Dulceață de nuci verzi",
+            "pop": 4,
+            "note": "nuci culese necoapte, fierte lung în sirop; dulceață de cămară, frecventă în Oltenia și Muntenia"
+          },
+          {
+            "name": "Scovergi",
+            "pop": 3,
+            "note": "turte de aluat prăjite în ulei, servite dulci cu zahăr sau magiun; nume oltenesc"
+          },
+          {
+            "name": "Alivenci",
+            "pop": 2,
+            "note": "desert moldovenesc din brânză de vaci, mălai, ouă și smântână, coapte la tavă"
+          },
+          {
+            "name": "Turte cu nuci",
+            "pop": 2,
+            "note": "foi uscate coapte pe plită, stratificate cu nucă și miere sau lapte; desert de Ajun în Oltenia și Banat"
+          },
+          {
+            "name": "Lichiu",
+            "pop": 1,
+            "note": "lipie dulce din aluat dospit cu smântână și zahăr, coaptă la cuptor; desert ardelean din zona Mureș-Sibiu"
+          }
+        ]
+      },
     {
       "id": "personaje-film",
       "region": "moldova",

@@ -2,16 +2,16 @@
 
 import Link from 'next/link'
 import { useEffect, useReducer, useRef, useState } from 'react'
+import { RevealClient } from '@/components/RevealClient'
 import { ShareButton } from '@/components/ShareButton'
 import { StitchDefs, StitchMap } from '@/components/StitchMap'
-import { countFinished, markInFlight, saveGame, takeInFlight, type PromptResult } from '@/lib/progress'
-import { logGameFinish, logGameStart, logSistemigroClick } from '@/lib/client-events'
+import { countFinished, loadGame, markInFlight, saveGame, takeInFlight, type PromptResult } from '@/lib/progress'
+import { logGameFinish, logGameStart } from '@/lib/client-events'
 import { pointsToTier, totalToTitle } from '@/lib/score'
 import {
   ANSWER_MS,
   MAX_ANSWER_LENGTH,
   MAX_SCORE,
-  PREVIEW_MS,
   REGION_LABELS,
   TIER_FILL,
   TIER_LABELS,
@@ -24,9 +24,9 @@ import {
   type Tier,
 } from '@/lib/types'
 
-type Props = { gameId: GameId; title: string; prompts: ClientPrompt[] }
+type Props = { gameId: GameId; title: string; prompts: Pick<ClientPrompt, 'id' | 'region'>[]; nextGameId?: GameId }
 
-type Phase = 'idle' | 'preview' | 'answering' | 'submitting' | 'result' | 'finished'
+type Phase = 'idle' | 'loading' | 'answering' | 'submitting' | 'result' | 'finished'
 
 type State = {
   phase: Phase
@@ -39,41 +39,44 @@ type State = {
   /** What the player typed and had rejected, for the role="status" message. */
   rejected: string | null
   offline: boolean
+  skipped: boolean
 }
 
 type Action =
   | { type: 'begin'; at: number }
   | { type: 'resume'; results: PromptResult[]; index: number; at: number }
-  | { type: 'answer' }
+  | { type: 'loaded'; at: number }
+  | { type: 'loading' }
   | { type: 'submit' }
   | { type: 'miss'; answer: string }
-  | { type: 'score'; result: PromptResult; offline?: boolean }
+  | { type: 'score'; result: PromptResult; offline?: boolean; skipped?: boolean }
   | { type: 'next'; at: number; total: number }
 
 const SEGMENTS = Math.round(ANSWER_MS / 1000)
 
-const previewEndsAt = (startedAt: number) => startedAt + PREVIEW_MS
-const answerEndsAt = (startedAt: number) => startedAt + PREVIEW_MS + ANSWER_MS
+const answerEndsAt = (startedAt: number) => startedAt + ANSWER_MS
 
-function ratat(prompt: ClientPrompt, answer = ''): PromptResult {
+function ratat(prompt: Pick<ClientPrompt, 'id' | 'region'>, answer = ''): PromptResult {
   return { promptId: prompt.id, region: prompt.region, answer, tier: 'ratat', points: 0 }
 }
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'begin':
-      return { ...state, phase: 'preview', index: 0, promptStartedAt: action.at }
+      return { ...state, phase: 'loading', index: 0, promptStartedAt: action.at }
     case 'resume':
       return {
         ...state,
-        phase: 'preview',
+        phase: 'loading',
         index: action.index,
         promptStartedAt: action.at,
         results: action.results,
         last: null,
       }
-    case 'answer':
-      return state.phase === 'preview' ? { ...state, phase: 'answering' } : state
+    case 'loaded':
+      return { ...state, phase: 'answering', promptStartedAt: action.at }
+    case 'loading':
+      return { ...state, phase: 'loading' }
     case 'submit':
       return { ...state, phase: 'submitting', rejected: null, offline: false }
     case 'miss':
@@ -84,13 +87,14 @@ function reducer(state: State, action: Action): State {
         phase: 'result',
         rejected: null,
         offline: action.offline ?? false,
+        skipped: action.skipped ?? false,
         last: action.result,
         results: [...state.results, action.result],
       }
     case 'next': {
       const next = { ...state, last: null, rejected: null, offline: false }
       if (state.index + 1 >= action.total) return { ...next, phase: 'finished' }
-      return { ...next, phase: 'preview', index: state.index + 1, promptStartedAt: action.at }
+      return { ...next, phase: 'loading', index: state.index + 1, promptStartedAt: action.at }
     }
   }
 }
@@ -106,7 +110,7 @@ async function postCheck(body: CheckRequest): Promise<CheckResult> {
   return (await response.json()) as CheckResult
 }
 
-export function GameClient({ gameId, title, prompts }: Props) {
+export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
   const [state, dispatch] = useReducer(reducer, {
     phase: 'idle',
     index: 0,
@@ -115,13 +119,19 @@ export function GameClient({ gameId, title, prompts }: Props) {
     last: null,
     rejected: null,
     offline: false,
+    skipped: false,
   })
+  const [activePrompt, setActivePrompt] = useState<ClientPrompt | null>(null)
+  const [loadError, setLoadError] = useState(false)
   const [draft, setDraft] = useState('')
   const [segmentsLeft, setSegmentsLeft] = useState(SEGMENTS)
   const [packsDone, setPacksDone] = useState(0)
+  const [officialScore, setOfficialScore] = useState<number | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const pendingRef = useRef(false)
+  const [skipError, setSkipError] = useState(false)
 
-  const prompt = prompts[state.index]
+  const prompt = activePrompt
   const { phase, promptStartedAt } = state
   const finished = phase === 'finished'
 
@@ -130,24 +140,17 @@ export function GameClient({ gameId, title, prompts }: Props) {
 
   const score = state.results.reduce((total, r) => total + r.points, 0)
 
-  // Mid-prompt reload: the marker this session never cleared. The prompts up to
-  // and including it are lost, so they score Ratat — reloading must never be
-  // worth more than playing on.
   useEffect(() => {
     const interrupted = takeInFlight(gameId)
     if (!interrupted) return
-
     const at = prompts.findIndex((p) => p.id === interrupted)
     if (at < 0) return
-
     const lost = prompts.slice(0, at + 1).map((p) => ratat(p))
-    if (at + 1 >= prompts.length) {
-      dispatch({ type: 'resume', results: lost.slice(0, -1), index: at, at: Date.now() })
-      dispatch({ type: 'score', result: lost[at] })
-      return
-    }
     dispatch({ type: 'resume', results: lost, index: at + 1, at: Date.now() })
-  }, [gameId, prompts])
+    void loadPrompt('next')
+  // The recovery is only attempted on mount.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameId])
 
   // The in-flight marker is written the moment the window opens, not when it
   // closes, which is what makes the reload above detectable.
@@ -166,18 +169,15 @@ export function GameClient({ gameId, title, prompts }: Props) {
    * remaining time — often already past, which times out at once.
    */
   useEffect(() => {
-    if (phase !== 'preview' && phase !== 'answering') return
+    if (phase !== 'answering') return
 
     let frame = 0
     const evaluate = () => {
-      const now = Date.now()
-      if (phase === 'preview') {
-        if (now >= previewEndsAt(promptStartedAt)) dispatch({ type: 'answer' })
-        setSegmentsLeft(SEGMENTS)
-      } else {
-        const remaining = answerEndsAt(promptStartedAt) - now
-        setSegmentsLeft(Math.max(0, Math.ceil(remaining / 1000)))
-        if (remaining <= 0 && prompt) dispatch({ type: 'score', result: ratat(prompt) })
+      const remaining = answerEndsAt(promptStartedAt) - Date.now()
+      setSegmentsLeft(Math.max(0, Math.ceil(remaining / 1000)))
+      if (remaining <= 0 && prompt && !pendingRef.current) {
+        pendingRef.current = true
+        dispatch({ type: 'score', result: ratat(prompt) })
       }
     }
 
@@ -208,6 +208,7 @@ export function GameClient({ gameId, title, prompts }: Props) {
       finishedAt: new Date().toISOString(),
     })
     // Counted after the save, so this game counts itself in "Pachete: N/7".
+    setOfficialScore(loadGame(gameId)?.score ?? total)
     setPacksDone(countFinished())
     logGameFinish(gameId, total)
   }, [finished, gameId, state.results])
@@ -215,11 +216,13 @@ export function GameClient({ gameId, title, prompts }: Props) {
   async function submit(event: React.FormEvent) {
     event.preventDefault()
     const answer = draft.trim().slice(0, MAX_ANSWER_LENGTH)
-    if (!answer || phase !== 'answering' || !prompt) return
+    if (!answer || phase !== 'answering' || !prompt || pendingRef.current) return
+    pendingRef.current = true
+    setSkipError(false)
 
     // Stamped before the fetch: the round trip is not on the player's clock.
     const submittedAt = Date.now()
-    const elapsedMs = Math.max(0, submittedAt - previewEndsAt(promptStartedAt))
+    const elapsedMs = Math.max(0, submittedAt - promptStartedAt)
     dispatch({ type: 'submit' })
 
     const body: CheckRequest = { gameId, promptId: prompt.id, answer, elapsedMs }
@@ -239,6 +242,7 @@ export function GameClient({ gameId, title, prompts }: Props) {
 
     if (!result.matched) {
       if (Date.now() < answerEndsAt(promptStartedAt)) {
+        pendingRef.current = false
         dispatch({ type: 'miss', answer })
       } else {
         dispatch({ type: 'score', result: ratat(prompt, answer) })
@@ -260,8 +264,50 @@ export function GameClient({ gameId, title, prompts }: Props) {
     })
   }
 
+  async function loadPrompt(action: 'start' | 'next') {
+    setLoadError(false)
+    try {
+      const response = await fetch('/api/game', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ gameId, action }),
+      })
+      if (!response.ok) throw new Error('Could not load question')
+      const data = await response.json() as { prompt: ClientPrompt | null }
+      if (data.prompt) {
+        pendingRef.current = false
+        setSkipError(false)
+        setActivePrompt(data.prompt)
+        setSegmentsLeft(SEGMENTS)
+        dispatch({ type: 'loaded', at: Date.now() })
+      } else {
+        dispatch({ type: 'next', at: Date.now(), total: prompts.length })
+      }
+    } catch { setLoadError(true) }
+  }
+
+  async function skip() {
+    if (phase !== 'answering' || !prompt || pendingRef.current) return
+    pendingRef.current = true
+    setSkipError(false)
+    dispatch({ type: 'submit' })
+    try {
+      const response = await fetch('/api/game', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ gameId, action: 'skip', promptId: prompt.id }),
+      })
+      if (!response.ok) throw new Error('Could not skip question')
+      setDraft('')
+      dispatch({ type: 'score', result: ratat(prompt), skipped: true })
+    } catch {
+      pendingRef.current = false
+      setSkipError(true)
+      dispatch({ type: 'miss', answer: '' })
+    }
+  }
+
   function advance() {
-    dispatch({ type: 'next', at: Date.now(), total: prompts.length })
+    dispatch({ type: 'next', at: Date.now(), total: prompts.length + 1 })
+    void loadPrompt('next')
   }
 
   const done = state.results.length >= prompts.length
@@ -271,7 +317,7 @@ export function GameClient({ gameId, title, prompts }: Props) {
       <StitchDefs />
 
       <header className="flex items-baseline justify-between gap-2 border-b-2 border-ink pb-2">
-        <a href="/" className="font-display text-xs">
+        <a href="/" className="font-display text-xs" onClick={() => takeInFlight(gameId)}>
           ‹ Pachete
         </a>
         <h2 className="font-display text-sm font-bold tracking-wide">{title}</h2>
@@ -324,7 +370,7 @@ export function GameClient({ gameId, title, prompts }: Props) {
         <section className="card mt-4 p-4">
           <h3 className="font-display text-lg font-bold">{title}</h3>
           <p className="mt-2 text-sm text-muted">
-            7 întrebări · 20 de secunde fiecare · un scor oficial
+            7 întrebări · 20 de secunde fiecare · un scor
           </p>
           <button
             type="button"
@@ -332,6 +378,7 @@ export function GameClient({ gameId, title, prompts }: Props) {
             onClick={() => {
               logGameStart(gameId)
               dispatch({ type: 'begin', at: Date.now() })
+              void loadPrompt('start')
             }}
           >
             Începe
@@ -339,7 +386,13 @@ export function GameClient({ gameId, title, prompts }: Props) {
         </section>
       )}
 
-      {(phase === 'preview' || phase === 'answering' || phase === 'submitting') && prompt && (
+      {phase === 'loading' && (
+        <div role="status" className="card mt-4 p-4 text-sm">
+          {loadError ? <><p>Nu am putut încărca întrebarea. Încearcă din nou.</p><button type="button" className="btn-thread mt-3 bg-action px-3 py-2 text-white" onClick={() => void loadPrompt(state.index === 0 && state.results.length === 0 ? 'start' : 'next')}>Reîncearcă</button></> : 'Se încarcă întrebarea…'}
+        </div>
+      )}
+
+      {(phase === 'answering' || phase === 'submitting') && prompt && (
         <section className="mt-4">
           <div className="card p-4">
             <p className="font-display text-xs text-muted">
@@ -387,8 +440,11 @@ export function GameClient({ gameId, title, prompts }: Props) {
             </button>
           </form>
 
+          <button type="button" disabled={phase !== 'answering'} onClick={() => void skip()} className="mt-3 w-full border-2 px-4 py-3 text-base font-bold disabled:opacity-60">Sari peste</button>
+
           <div role="status" className="mt-2 min-h-5 text-sm text-brand">
             {phase === 'submitting' && 'Se verifică…'}
+            {skipError && 'Nu am putut sări peste întrebare. Încearcă din nou.'}
             {phase === 'answering' &&
               state.rejected &&
               `«${state.rejected}» nu e pe listă încă. Mai încearcă!`}
@@ -406,7 +462,7 @@ export function GameClient({ gameId, title, prompts }: Props) {
             +{state.last.points}
             <span className="sr-only"> puncte</span>
           </p>
-          {state.last.tier === 'ratat' && !state.offline && (
+          {state.last.tier === 'ratat' && !state.offline && !state.skipped && (
             <p className="mt-1 text-sm text-muted">Timpul a expirat.</p>
           )}
           {state.offline && (
@@ -427,6 +483,7 @@ export function GameClient({ gameId, title, prompts }: Props) {
       {finished && (
         <section className="card mt-4 p-4 text-center">
           <h3 className="font-display text-lg font-bold">Marea Unire</h3>
+          <p className="mt-2 text-xs text-muted">Scorul acestei runde</p>
           <p className="font-display mt-2 text-3xl text-brand">
             {score}
             <span className="text-base text-muted">/{MAX_SCORE}</span>
@@ -443,39 +500,20 @@ export function GameClient({ gameId, title, prompts }: Props) {
               tiers={state.results.map((r) => pointsToTier(r.points))}
               packsDone={packsDone}
             />
-            <Link
-              href={`/joc/${gameId}/raspunsuri`}
-              className="border-[3px] bg-card px-3 py-2.5 text-base font-bold no-underline"
-            >
-              Vezi răspunsurile
-            </Link>
-            <Link
-              href="/"
-              className="border-[3px] bg-blue px-3 py-2.5 text-base font-bold text-white no-underline"
+            {nextGameId && <Link
+              href={`/joc/${nextGameId}`}
+              className="btn-thread bg-blue px-3 py-3 text-xl text-white no-underline"
             >
               Următorul pachet
-            </Link>
+            </Link>}
+            <Link href="/" className="btn-thread bg-action px-3 py-3 text-xl text-white no-underline">Înapoi la pachete</Link>
           </div>
 
           <p className="mt-3 text-xs text-muted">
-            Scorul oficial e salvat. Poți rejuca pentru distracție.
+            Scor: {officialScore ?? score} / {MAX_SCORE}. Poți rejuca pentru distracție.
           </p>
 
-          <aside className="mt-5 -mx-4 -mb-4 flex flex-col gap-1.5 bg-ink px-4 py-4 text-left text-linen">
-            <span className="font-display text-lg font-bold">Ai o idee de aplicație?</span>
-            <span className="text-sm leading-snug">
-              Am construit jocul ăsta în 4 zile. Hai să vorbim despre al tău.
-            </span>
-            <a
-              href="https://sistemigro.com?utm_source=unul-la-un-milion&utm_medium=final&utm_campaign=1-decembrie"
-              target="_blank"
-              rel="noopener"
-              onClick={() => logSistemigroClick('final')}
-              className="text-sm font-bold text-yellow"
-            >
-              sistemigro.com
-            </a>
-          </aside>
+          <RevealClient gameId={gameId} title={title} embedded results={state.results} />
         </section>
       )}
     </div>

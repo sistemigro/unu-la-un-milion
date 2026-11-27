@@ -69,33 +69,198 @@
       ]
     },
     {
-      "id": "tratate-si-pace",
-      "region": "dobrogea",
-      "text": "Un tratat sau o pace din istoria românilor",
-      "accepts": "Orice tratat, pace, convenție sau pact internațional la care statul român ori Principatele au fost parte sau care a decis statutul unor teritorii românești, până în 1947",
-      "answers": [
-        { "name": "Tratatul de la Trianon", "pop": 58, "alias": ["trianon"], "note": "4 iunie 1920; recunoaște unirea Transilvaniei cu România" },
-        { "name": "Pactul Ribbentrop-Molotov", "pop": 50, "alias": ["pactul molotov-ribbentrop"], "note": "23 august 1939; protocolul secret include Basarabia în sfera sovietică" },
-        { "name": "Tratatul de la Versailles", "pop": 20, "alias": ["versailles"], "note": "28 iunie 1919; tratatul cu Germania, semnat și de România" },
-        { "name": "Pacea de la Adrianopol", "pop": 14, "note": "1829; libertatea comerțului pentru Principate, Brăila, Giurgiu și Turnu revin Țării Românești" },
-        { "name": "Tratatul de la Berlin", "pop": 13, "note": "iulie 1878; recunoaște independența României, Dobrogea revine României" },
-        { "name": "Pacea de la Paris", "pop": 9, "note": "1856; după Războiul Crimeii, Principatele intră sub garanția colectivă a puterilor" },
-        { "name": "Pacea de la București", "pop": 5, "note": "16 mai 1812; Rusia anexează teritoriul dintre Prut și Nistru" },
-        { "name": "Tratatul de la Saint-Germain", "pop": 4, "note": "10 septembrie 1919; tratatul cu Austria, consfințește unirea Bucovinei" },
-        { "name": "Pacea de la San Stefano", "pop": 3, "note": "3 martie 1878; pacea preliminară ruso-otomană, nefavorabilă României" },
-        { "name": "Tratatul de la Craiova", "pop": 3, "note": "7 septembrie 1940; Cadrilaterul revine Bulgariei" },
-        { "name": "Pacea de la Kuciuk-Kainargi", "pop": 2, "note": "1774; Rusia obține dreptul de a interveni în favoarea Principatelor" },
-        { "name": "Pacea de la Iași", "pop": 2, "note": "1792; granița ruso-otomană este fixată pe Nistru" },
-        { "name": "Tratatul de la Neuilly", "pop": 2, "note": "27 noiembrie 1919; tratatul cu Bulgaria, confirmă granița din Dobrogea" },
-        { "name": "Tratatul de la Sèvres", "pop": 2, "note": "10 august 1920; tratatul cu Imperiul Otoman, semnat și de România" },
-        { "name": "Pacea de la Passarowitz", "pop": 1, "note": "1718; Banatul și Oltenia trec la Habsburgi" },
-        { "name": "Pacea de la Belgrad", "pop": 1, "note": "1739; Oltenia revine Țării Românești" },
-        { "name": "Pacea de la Karlowitz", "pop": 1, "note": "1699; Transilvania este recunoscută ca stăpânire habsburgică" },
-        { "name": "Pacea de la Satu Mare", "pop": 1, "note": "1711; încheie răscoala antihabsburgică a curuților" },
-        { "name": "Tratatul de la Luțk", "pop": 1, "note": "13 aprilie 1711; alianța lui Dimitrie Cantemir cu Petru cel Mare" },
-        { "name": "Pacea de la Șiștov", "pop": 1, "note": "1791; pacea austro-otomană care încheie războiul purtat și pe teritoriul Principatelor" }
-      ]
-    },
+        "id": "personalitati-istoria-romaniei",
+        "region": "dobrogea",
+        "text": "Numește un domnitor român sau o persoană implicată în Marea Unire din 1918",
+        "accepts": "Domnitori ai Țării Românești sau ai Moldovei și personalități ale Marii Uniri din 1918.",
+        "answers": [
+          {
+            "name": "Mihai Viteazul",
+            "pop": 68,
+            "note": "domn 1593–1600; unirea celor trei țări românești în 1600"
+          },
+          {
+            "name": "Vlad Țepeș",
+            "pop": 62,
+            "alias": [
+              "vlad iii",
+              "vlad draculea"
+            ],
+            "note": "domn 1448, 1456–62, 1476"
+          },
+          {
+            "name": "Constantin Brâncoveanu",
+            "pop": 34,
+            "alias": [
+              "brâncoveanu"
+            ],
+            "note": "domn 1688–1714"
+          },
+          {
+            "name": "Mircea cel Bătrân",
+            "pop": 30,
+            "note": "domn 1386–1418"
+          },
+          {
+            "name": "Alexandru Ioan Cuza",
+            "pop": 18,
+            "alias": [
+              "cuza"
+            ],
+            "note": "ales domn al Țării Românești la 24 ianuarie 1859"
+          },
+          {
+            "name": "Neagoe Basarab",
+            "pop": 14,
+            "note": "domn 1512–21; ctitorul bisericii episcopale de la Curtea de Argeș"
+          },
+          {
+            "name": "Matei Basarab",
+            "pop": 13,
+            "note": "domn 1632–54"
+          },
+          {
+            "name": "Basarab I",
+            "pop": 6,
+            "alias": [
+              "basarab întemeietorul"
+            ],
+            "note": "c. 1310–1352; întemeietorul Țării Românești"
+          },
+          {
+            "name": "Vlad Dracul",
+            "pop": 4,
+            "alias": [
+              "vlad ii"
+            ],
+            "note": "domn 1436–42, 1443–47; tatăl lui Vlad Țepeș"
+          },
+          {
+            "name": "Radu cel Frumos",
+            "pop": 4,
+            "note": "domn 1462–73, cu întreruperi; fratele lui Vlad Țepeș"
+          },
+          {
+            "name": "Ștefan cel Mare",
+            "pop": 71,
+            "alias": [
+              "ștefan iii"
+            ],
+            "note": "domn 1457–1504"
+          },
+          {
+            "name": "Alexandru cel Bun",
+            "pop": 24,
+            "note": "domn 1400–1432"
+          },
+          {
+            "name": "Alexandru Lăpușneanu",
+            "pop": 20,
+            "alias": [
+              "lăpușneanu"
+            ],
+            "note": "domn 1552–61, 1564–68"
+          },
+          {
+            "name": "Dimitrie Cantemir",
+            "pop": 14,
+            "note": "domn 1693 și 1710–11; autorul Descrierii Moldovei"
+          },
+          {
+            "name": "Petru Rareș",
+            "pop": 9,
+            "alias": [
+              "rareș"
+            ],
+            "note": "domn 1527–38, 1541–46; fiul lui Ștefan cel Mare"
+          },
+          {
+            "name": "Vasile Lupu",
+            "pop": 8,
+            "note": "domn 1634–53"
+          },
+          {
+            "name": "Dragoș Vodă",
+            "pop": 6,
+            "note": "c. 1347–1354; descălecatul din Maramureș, primul voievod al Moldovei"
+          },
+          {
+            "name": "Bogdan I",
+            "pop": 5,
+            "note": "domn 1359–1365; întemeietorul Moldovei independente"
+          },
+          {
+            "name": "Ion Vodă cel Cumplit",
+            "pop": 5,
+            "alias": [
+              "ioan vodă cel cumplit",
+              "ion vodă cel viteaz"
+            ],
+            "note": "domn 1572–74"
+          },
+          {
+            "name": "Regele Ferdinand I",
+            "pop": 56,
+            "alias": [
+              "ferdinand",
+              "ferdinand i",
+              "ferdinand întemeietorul"
+            ],
+            "note": "1865–1927; rege al României 1914–27, a sancționat actele Unirii"
+          },
+          {
+            "name": "Regina Maria",
+            "pop": 50,
+            "alias": [
+              "maria de edinburgh"
+            ],
+            "note": "1875–1938; regină a României, simbol al efortului din 1916–18"
+          },
+          {
+            "name": "Iuliu Maniu",
+            "pop": 30,
+            "note": "1873–1953; președintele Consiliului Dirigent al Transilvaniei, 1918–20"
+          },
+          {
+            "name": "Ion I. C. Brătianu",
+            "pop": 20,
+            "alias": [
+              "ionel brătianu"
+            ],
+            "note": "1864–1927; prim-ministru în 1914–18 și din decembrie 1918"
+          },
+          {
+            "name": "Vasile Goldiș",
+            "pop": 9,
+            "note": "1862–1934; a prezentat raportul Unirii la Alba Iulia, 1 decembrie 1918"
+          },
+          {
+            "name": "Alexandru Vaida-Voevod",
+            "pop": 6,
+            "note": "1872–1950; a citit declarația de autodeterminare în parlamentul de la Budapesta, octombrie 1918"
+          },
+          {
+            "name": "Iuliu Hossu",
+            "pop": 5,
+            "note": "1885–1970; a citit Rezoluția Unirii la Alba Iulia"
+          },
+          {
+            "name": "Ion Inculeț",
+            "pop": 4,
+            "note": "1884–1940; președintele Sfatului Țării, unirea Basarabiei, 27 martie 1918"
+          },
+          {
+            "name": "Iancu Flondor",
+            "pop": 3,
+            "note": "1865–1924; a condus Congresul general al Bucovinei, 28 noiembrie 1918"
+          },
+          {
+            "name": "Gheorghe Pop de Băsești",
+            "pop": 3,
+            "note": "1835–1919; președintele Marii Adunări Naționale de la Alba Iulia"
+          }
+        ]
+      },
     {
       "id": "domnitori-moldova",
       "region": "moldova",
@@ -159,7 +324,7 @@
     {
       "id": "marea-unire",
       "region": "maramures-bucovina",
-      "text": "O personalitate a Marii Uniri de la 1918",
+      "text": "Numește o persoană care a avut un rol în Marea Unire din 1918",
       "accepts": "Orice personalitate cu rol documentat în unirea Basarabiei, Bucovinei sau Transilvaniei cu România în 1918, inclusiv familia regală și conducătorii politici ai momentului",
       "answers": [
         { "name": "Regele Ferdinand I", "pop": 56, "alias": ["ferdinand", "ferdinand i", "ferdinand întemeietorul"], "note": "1865–1927; rege al României 1914–27, a sancționat actele Unirii" },

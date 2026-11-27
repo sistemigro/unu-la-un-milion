@@ -22,7 +22,11 @@ export type GameProgress = {
   score: number
   results: PromptResult[]
   finishedAt: string
+  latestResults?: PromptResult[]
+  details?: ResultDetail[]
 }
+
+export type ResultDetail = { promptId: string; text: string; fact?: string }
 
 const gameKey = (gameId: GameId) => `${PREFIX}:game:${gameId}`
 const inFlightKey = (gameId: GameId) => `${PREFIX}:inflight:${gameId}`
@@ -71,7 +75,7 @@ export function loadGame(gameId: GameId): GameProgress | null {
     if (parsed.v !== VERSION) return null
     if (typeof parsed.score !== 'number' || typeof parsed.finishedAt !== 'string') return null
     if (!Array.isArray(parsed.results)) return null
-    return { score: parsed.score, results: parsed.results, finishedAt: parsed.finishedAt }
+    return { score: parsed.score, results: parsed.results, finishedAt: parsed.finishedAt, latestResults: Array.isArray(parsed.latestResults) ? parsed.latestResults : parsed.results, details: Array.isArray(parsed.details) ? parsed.details : undefined }
   } catch {
     return null
   }
@@ -80,9 +84,18 @@ export function loadGame(gameId: GameId): GameProgress | null {
 /** A finished game's score is official and immutable: replay does not rescore. */
 export function saveGame(gameId: GameId, progress: GameProgress): void {
   const existing = loadGame(gameId)
-  if (existing?.finishedAt) return
+  if (existing?.finishedAt) {
+    write(gameKey(gameId), JSON.stringify({ v: VERSION, ...existing, latestResults: progress.results, details: undefined }))
+    return
+  }
 
-  write(gameKey(gameId), JSON.stringify({ v: VERSION, ...progress }))
+  write(gameKey(gameId), JSON.stringify({ v: VERSION, ...progress, latestResults: progress.results }))
+}
+
+export function saveResultDetails(gameId: GameId, results: PromptResult[], details: ResultDetail[]): void {
+  const progress = loadGame(gameId)
+  if (!progress || JSON.stringify(progress.latestResults) !== JSON.stringify(results)) return
+  write(gameKey(gameId), JSON.stringify({ v: VERSION, ...progress, details }))
 }
 
 /**
