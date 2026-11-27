@@ -21,24 +21,23 @@ import type { GameEvent } from '@/lib/types'
  */
 
 const SUPABASE_URL = process.env.SUPABASE_URL
-const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
+const SECRET_KEY = process.env.SUPABASE_SECRET_KEY
 
 /** Unconfigured is a normal state, not an error — local dev runs without it. */
-const enabled = Boolean(SUPABASE_URL && SERVICE_ROLE_KEY)
+const enabled = Boolean(SUPABASE_URL && SECRET_KEY)
 
 let warned = false
 function warnOnce() {
   if (warned || process.env.NODE_ENV === 'production') return
   warned = true
-  console.info('[log] SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY unset — not logging')
+  console.info('[log] SUPABASE_URL / SUPABASE_SECRET_KEY unset — not logging')
 }
 
 async function insert(table: string, row: Record<string, unknown>) {
   const response = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
     method: 'POST',
     headers: {
-      apikey: SERVICE_ROLE_KEY!,
-      authorization: `Bearer ${SERVICE_ROLE_KEY}`,
+      apikey: SECRET_KEY!,
       'content-type': 'application/json',
       prefer: 'return=minimal',
     },
