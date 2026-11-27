@@ -181,6 +181,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
       setSegmentsLeft(Math.max(0, Math.ceil(remaining / 1000)))
       if (remaining <= 0 && prompt && !pendingRef.current) {
         pendingRef.current = true
+        setDraft('')
         dispatch({ type: 'score', result: ratat(prompt) })
       }
     }
@@ -284,6 +285,7 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
       if (data.prompt) {
         pendingRef.current = false
         setSkipError(false)
+        setDraft('')
         setActivePrompt(data.prompt)
         setSegmentsLeft(SEGMENTS)
         dispatch({ type: 'loaded', at: Date.now() })
@@ -359,18 +361,11 @@ export function GameClient({ gameId, title, prompts, nextGameId }: Props) {
         })}
       </ol>
 
-      {/* On the result card the highlight previews the NEXT region, not the one
-          just stitched — the brief's "Continuă, cu o previzualizare a regiunii
-          următoare". Highlighting what was just filled only restates it. */}
       <StitchMap
         className="mt-3 w-full"
         tiers={tiers}
         highlight={
-          done
-            ? undefined
-            : phase === 'result'
-              ? prompts[state.index + 1]?.region
-              : prompt?.region
+          phase === 'result' ? state.last?.region : done ? undefined : prompt?.region
         }
       />
 
