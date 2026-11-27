@@ -128,6 +128,17 @@ export type CheckResult = {
   regionId: RegionId
 }
 
+/** POST body for /api/check. The client owns the clock; the server clamps it. */
+export type CheckRequest = {
+  gameId: GameId
+  promptId: string
+  answer: string
+  elapsedMs: number
+}
+
+/** Longest answer we will even look at — a guard, not a game rule. */
+export const MAX_ANSWER_LENGTH = 120
+
 export const GAME_TITLES: Record<GameId, string> = {
   '1-decembrie': 'Ediția 1 Decembrie',
   istorie: 'Istorie',

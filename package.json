@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit",
     "map:build": "tsx scripts/build-map-grid.ts",
     "bank:report": "tsx scripts/bank-report.ts",
-    "bank:missed": "tsx scripts/missed.ts"
+    "bank:missed": "tsx scripts/missed.ts",
+    "check:leak": "bash scripts/check-leak.sh"
   },
   "dependencies": {
     "next": "16.4.6",
