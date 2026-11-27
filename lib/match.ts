@@ -1,21 +1,54 @@
 import type { BankAnswer, BankPrompt } from '@/lib/types'
-import { expandKeys, normalize } from '@/lib/normalize'
+import { expandKeys, normalize, surnameKey } from '@/lib/normalize'
 
 export type PromptIndex = {
   promptId: string
   byKey: Map<string, BankAnswer>
+  /** Bare surnames, consulted only after an exact miss. */
+  bySurname: Map<string, BankAnswer>
 }
 
 /** Build once per prompt and reuse across requests — never per keystroke. */
 export function buildPromptIndex(prompt: BankPrompt): PromptIndex {
   const byKey = new Map<string, BankAnswer>()
+  const bySurname = new Map<string, BankAnswer>()
+
   for (const answer of prompt.answers) {
     for (const key of expandKeys(answer)) {
       // First writer wins, so a derived key never shadows a canonical one.
       if (!byKey.has(key)) byKey.set(key, answer)
     }
   }
-  return { promptId: prompt.id, byKey }
+
+  // Players type surnames — the brief's own running joke is "the whole country
+  // said Hagi". Without this, "Hagi", "Halep" and "Comăneci" are all rejected:
+  // they sit below the fuzzy length floor and are nobody's full name.
+  //
+  // Where two people share a surname, the better-known one takes it, because
+  // that is what a bare "Hagi" means. Kept in a separate map so it can never
+  // shadow somebody else's exact full name.
+  // Words that appear mid-name anywhere in this prompt — someone's first name,
+  // or a shared dynastic name. "Ivan" is Patzaichin's forename as well as Paula
+  // Ivan's surname, and three different Basarabs sit in one prompt, so a bare
+  // input is genuinely ambiguous. Rejected rather than guessed, exactly as an
+  // ambiguous fuzzy tie is.
+  const ambiguous = new Set<string>()
+  for (const answer of prompt.answers) {
+    const words = normalize(answer.name).split(' ')
+    for (const word of words.slice(0, -1)) ambiguous.add(word)
+  }
+
+  for (const answer of prompt.answers) {
+    for (const source of [answer.name, ...(Array.isArray(answer.alias) ? answer.alias : [])]) {
+      const surname = surnameKey(source)
+      if (!surname || byKey.has(surname) || ambiguous.has(surname)) continue
+
+      const held = bySurname.get(surname)
+      if (!held || answer.pop > held.pop) bySurname.set(surname, answer)
+    }
+  }
+
+  return { promptId: prompt.id, byKey, bySurname }
 }
 
 /** Below this, a one-edit neighbourhood is full of unrelated real words. */
@@ -56,6 +89,11 @@ export function matchAnswer(index: PromptIndex, rawInput: string): BankAnswer | 
 
   const exact = index.byKey.get(input)
   if (exact) return exact
+
+  // Surnames before fuzzy: "Hagi" is a deliberate, complete answer, not a typo
+  // of a longer one, and most surnames fall under the fuzzy length floor.
+  const bySurname = index.bySurname.get(input)
+  if (bySurname) return bySurname
 
   if (input.length < FUZZY_MIN_LENGTH) return null
 

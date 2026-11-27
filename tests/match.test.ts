@@ -97,3 +97,83 @@ describe('matchAnswer', () => {
     expect(matchAnswer(index, 'stefen cel mure')).toBeNull()
   })
 })
+
+describe('surname fallback', () => {
+  const rulers: BankPrompt = {
+    id: 'domnitori',
+    region: 'moldova',
+    text: 'Un domnitor',
+    accepts: 'test',
+    answers: [
+      { name: 'Ștefan cel Mare', pop: 71 },
+      { name: 'Petru Rareș', pop: 9, alias: ['rareș'] },
+      { name: 'Radu I', pop: 2 },
+    ],
+  }
+
+  const footballers: BankPrompt = {
+    id: 'fotbalisti',
+    region: 'muntenia',
+    text: 'Un fotbalist',
+    accepts: 'test',
+    answers: [
+      { name: 'Gheorghe Hagi', pop: 88, alias: ['gică hagi'] },
+      { name: 'Ianis Hagi', pop: 15 },
+      { name: 'Adrian Mutu', pop: 52 },
+    ],
+  }
+
+  const clubs: BankPrompt = {
+    id: 'cluburi',
+    region: 'oltenia',
+    text: 'Un club campion',
+    accepts: 'test',
+    answers: [
+      { name: 'Dinamo București', pop: 62 },
+      { name: 'Rapid București', pop: 42 },
+    ],
+  }
+
+  it('matches a bare surname — the brief’s own "toată țara a zis Hagi"', () => {
+    const index = buildPromptIndex(footballers)
+    expect(matchAnswer(index, 'Hagi')?.name).toBe('Gheorghe Hagi')
+    expect(matchAnswer(index, 'mutu')?.name).toBe('Adrian Mutu')
+  })
+
+  it('gives a shared surname to the better-known bearer', () => {
+    // A bare "Hagi" means Gheorghe, not his son.
+    expect(matchAnswer(buildPromptIndex(footballers), 'hagi')?.pop).toBe(88)
+  })
+
+  it('never treats a "cel" epithet as a surname', () => {
+    // "Ștefan cel Mare" must not be reachable as "Mare" — that names nobody.
+    const index = buildPromptIndex(rulers)
+    expect(matchAnswer(index, 'Mare')).toBeNull()
+    expect(matchAnswer(index, 'cel mare')).toBeNull()
+    expect(matchAnswer(index, 'Ștefan cel Mare')?.name).toBe('Ștefan cel Mare')
+  })
+
+  it('ignores place-name tails', () => {
+    // Six champion clubs end in "București"; the city names none of them.
+    expect(matchAnswer(buildPromptIndex(clubs), 'București')).toBeNull()
+    expect(matchAnswer(buildPromptIndex(clubs), 'Dinamo București')?.name).toBe(
+      'Dinamo București',
+    )
+  })
+
+  it('ignores tails under four characters, including regnal numerals', () => {
+    expect(matchAnswer(buildPromptIndex(rulers), 'I')).toBeNull()
+  })
+
+  it('never lets a surname shadow another answer’s exact full name', () => {
+    const index = buildPromptIndex({
+      ...rulers,
+      answers: [
+        { name: 'Movilă', pop: 3 },
+        { name: 'Ieremia Movilă', pop: 1 },
+      ],
+    })
+    // "Movilă" is somebody's whole name here, so the exact hit must win.
+    expect(matchAnswer(index, 'Movilă')?.pop).toBe(3)
+  })
+})

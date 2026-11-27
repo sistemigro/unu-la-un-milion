@@ -32,6 +32,64 @@ function stripArticle(key: string): string | null {
 }
 
 /**
+ * Place words that end a great many Romanian names without identifying one.
+ * Six different champion clubs end in "București", so indexing that tail would
+ * hand the bare city name to whichever happened to be most popular.
+ */
+const PLACE_TAILS = new Set([
+  'bucuresti',
+  'cluj',
+  'timisoara',
+  'iasi',
+  'constanta',
+  'craiova',
+  'ploiesti',
+  'arad',
+  'oradea',
+  'galati',
+  'brasov',
+  'sibiu',
+  'pitesti',
+  'bacau',
+  'targoviste',
+  'romania',
+  'romanesc',
+  'romaneasca',
+  'arena',
+  'stadionul',
+])
+
+/**
+ * The bare surname a player is most likely to type — "Hagi" for Gheorghe Hagi.
+ *
+ * Returns null where the last word is not a surname:
+ *  - Romanian epithets, which are built with "cel": "Ștefan cel Mare" would
+ *    otherwise be indexed under "mare".
+ *  - place names (above), and anything under 4 characters, which includes
+ *    regnal numerals like "Radu I".
+ */
+export function surnameKey(name: string): string | null {
+  const key = normalize(name)
+  const words = key.split(' ')
+  if (words.length < 2) return null
+  if (key.includes(' cel ')) return null
+
+  const last = words[words.length - 1]
+  if (last.length < 4) return null
+  if (PLACE_TAILS.has(last)) return null
+
+  // The tail must be a proper noun in the original spelling. Romanian
+  // capitalisation separates a surname from an ingredient cleanly: "Gheorghe
+  // Hagi" ends in a name, "Ciorbă de fasole" and "Orez cu lapte" end in a
+  // common noun that identifies no dish at all.
+  const originalTail = name.trim().split(/\s+/).pop() ?? ''
+  const firstLetter = originalTail[0] ?? ''
+  if (firstLetter !== firstLetter.toLocaleUpperCase('ro')) return null
+
+  return last
+}
+
+/**
  * Variants are expanded on the bank side only — user input gets `normalize`
  * and nothing else, so no rule here can maim what a player typed.
  */
