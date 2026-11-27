@@ -28,8 +28,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Unul la un milion — joc de cultură generală despre România',
-    template: '%s · Unul la un milion',
+    default: 'Unu’ la un milion — joc de cultură generală despre România',
+    template: '%s · Unu’ la un milion',
   },
   description:
     'Câte răspunsuri rare știi despre România? Șapte întrebări, 20 de secunde fiecare. ' +
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ro_RO',
-    siteName: 'Unul la un milion',
+    siteName: 'Unu’ la un milion',
     url: '/',
   },
   twitter: { card: 'summary_large_image' },

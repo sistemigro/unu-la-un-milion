@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Despre',
   description:
-    'Unul la un milion e un joc gratuit despre România, făcut de Sistemigro pentru 1 Decembrie.',
+    'Unu’ la un milion e un joc gratuit despre România, făcut de Sistemigro pentru 1 Decembrie.',
   alternates: { canonical: '/despre' },
 }
 
@@ -13,7 +13,7 @@ export default function Despre() {
       <h1 className="font-display text-2xl font-bold">Despre joc</h1>
 
       <p className="mt-5 text-[15px] leading-relaxed">
-        <strong>Unul la un milion</strong> e un joc gratuit de cultură generală despre
+        <strong>Unu’ la un milion</strong> e un joc gratuit de cultură generală despre
         România. Ideea e simplă: la fiecare întrebare toată lumea știe câteva răspunsuri,
         dar puține persoane merg mai departe. Jocul premiază exact asta — cu cât
         răspunsul tău e mai rar, cu atât primești mai multe puncte.

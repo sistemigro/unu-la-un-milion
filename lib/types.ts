@@ -48,7 +48,7 @@ export const TIER_LABELS: Record<Tier, string> = {
   cliseu: 'Clișeu',
   bun: 'Bun',
   rar: 'Rar',
-  ulm: 'Unul la un milion',
+  ulm: 'Unu’ la un milion',
 }
 
 /** Canvas colours. ULM is red by decision — the doc's gold #D4A017 is dropped. */

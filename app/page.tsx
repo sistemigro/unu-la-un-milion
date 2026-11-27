@@ -26,7 +26,7 @@ export default function Home() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Game',
-    name: 'Unul la un milion',
+    name: 'Unu’ la un milion',
     url: SITE_URL,
     inLanguage: 'ro',
     genre: 'Trivia',
@@ -61,7 +61,7 @@ export default function Home() {
         </svg>
         <div>
           <h1 className="font-display text-[26px] leading-none font-bold tracking-wide">
-            UNUL LA UN MILION
+            UNU’ LA UN MILION
           </h1>
           <p className="mt-1.5 text-sm leading-snug">
             Câte răspunsuri rare știi despre România?

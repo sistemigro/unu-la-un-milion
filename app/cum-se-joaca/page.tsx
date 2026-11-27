@@ -45,7 +45,7 @@ export default function CumSeJoaca() {
           </thead>
           <tbody>
             <tr>
-              <td className="border-b py-2 pr-4">Unul la un milion</td>
+              <td className="border-b py-2 pr-4">Unu’ la un milion</td>
               <td className="border-b py-2 pr-4">100</td>
             </tr>
             <tr>

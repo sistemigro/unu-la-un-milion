@@ -3,7 +3,7 @@ import { MAP_GRID } from '@/data/map-grid'
 import { REGION_OUTLINES, REGION_PATHS } from '@/lib/map'
 import { REGION_IDS, type RegionId } from '@/lib/types'
 
-export const alt = 'Unul la un milion — câte răspunsuri rare știi despre România?'
+export const alt = 'Unu’ la un milion — câte răspunsuri rare știi despre România?'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -46,7 +46,7 @@ export default async function OpengraphImage() {
       </div>
       <div style={{ position: 'absolute', top: 115, left: 65, width: 550, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <svg width="88" height="104" viewBox="0 0 11 13" shapeRendering="crispEdges"><path fill="#b3192b" d="M5 0h1v1h-1zM4 1h3v1h-3zM3 2h5v1h-5zM5 3h1v1h-1zM2 4h3v1h-3zM6 4h3v1h-3zM1 5h3v1h-3zM7 5h3v1h-3zM5 6h1v1h-1zM3 7h5v1h-5zM4 8h3v1h-3z"/><path fill="#d4a017" d="M5 0h1v1h-1zM4 1h3v1h-3z"/><path fill="#1e1a1a" d="M5 8h1v5H5zM4 12h3v1H4z"/></svg>
-        <div style={{ display: 'flex', flexDirection: 'column', fontFamily: font ? 'Pixelify Sans' : 'sans-serif', fontSize: 68, lineHeight: 0.96, fontWeight: 700, marginTop: 18 }}><span>UNUL LA UN</span><span>MILION</span></div>
+        <div style={{ display: 'flex', flexDirection: 'column', fontFamily: font ? 'Pixelify Sans' : 'sans-serif', fontSize: 68, lineHeight: 0.96, fontWeight: 700, marginTop: 18 }}><span>UNU’ LA UN</span><span>MILION</span></div>
         <div style={{ display: 'flex', flexDirection: 'column', fontFamily: bodyFont ? 'Space Grotesk' : 'sans-serif', fontSize: 30, lineHeight: 1.28, marginTop: 22 }}><span>Câte răspunsuri rare știi despre</span><span>România?</span></div>
         <div style={{ display: 'flex', marginTop: 18, padding: '10px 17px', border: '4px solid #1e1a1a', boxShadow: '5px 5px 0 #1e1a1a', background: '#ce1126', color: '#fff', fontFamily: font ? 'Pixelify Sans' : 'sans-serif', fontWeight: 700, fontSize: 23 }}>Ediția 1 Decembrie · joc gratuit</div>
       </div>

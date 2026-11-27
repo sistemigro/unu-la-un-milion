@@ -27,7 +27,7 @@ export function buildShareText({
 }): string {
   const squares = tiers.map((t) => TIER_SQUARE[t]).join('')
   return [
-    `Unul la un milion · ${gameTitle} · ${score}/${MAX_SCORE} · ${totalToTitle(score)}`,
+    `Unu’ la un milion · ${gameTitle} · ${score}/${MAX_SCORE} · ${totalToTitle(score)}`,
     squares,
     `Pachete: ${packsDone}/${PROMPTS_PER_GAME}`,
     url,

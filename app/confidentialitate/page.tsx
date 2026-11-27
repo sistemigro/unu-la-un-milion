@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Confidențialitate',
   description:
-    'Ce date colectează Unul la un milion: progresul rămâne în browserul tău, răspunsurile se salvează anonim.',
+    'Ce date colectează Unu’ la un milion: progresul rămâne în browserul tău, răspunsurile se salvează anonim.',
   alternates: { canonical: '/confidentialitate' },
 }
 
