@@ -139,6 +139,20 @@ export type CheckRequest = {
 /** Longest answer we will even look at — a guard, not a game rule. */
 export const MAX_ANSWER_LENGTH = 120
 
+/**
+ * Funnel events. Declared here rather than in `log.server.ts` so the browser
+ * helper can name the type without importing a `server-only` module at all —
+ * a type-only import would be erased, but the boundary is clearer this way.
+ */
+export type GameEvent = 'game_start' | 'game_finish' | 'share_click' | 'sistemigro_click'
+
+export const GAME_EVENTS: GameEvent[] = [
+  'game_start',
+  'game_finish',
+  'share_click',
+  'sistemigro_click',
+]
+
 export const GAME_TITLES: Record<GameId, string> = {
   '1-decembrie': 'Ediția 1 Decembrie',
   istorie: 'Istorie',

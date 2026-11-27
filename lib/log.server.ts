@@ -2,6 +2,7 @@ import 'server-only'
 
 import { after } from 'next/server'
 import { normalize } from '@/lib/normalize'
+import type { GameEvent } from '@/lib/types'
 
 /**
  * Anonymous answer log. Best-effort by design.
@@ -80,12 +81,6 @@ export function logAnswer(entry: AnswerLogEntry) {
     }
   })
 }
-
-export type GameEvent =
-  | 'game_start'
-  | 'game_finish'
-  | 'share_click'
-  | 'sistemigro_click'
 
 export function logEvent(event: GameEvent, gameId?: string, meta?: Record<string, unknown>) {
   if (!enabled) return warnOnce()

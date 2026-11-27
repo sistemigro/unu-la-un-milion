@@ -1,8 +1,11 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useReducer, useRef, useState } from 'react'
+import { ShareButton } from '@/components/ShareButton'
 import { StitchDefs, StitchMap } from '@/components/StitchMap'
-import { markInFlight, saveGame, takeInFlight, type PromptResult } from '@/lib/progress'
+import { countFinished, markInFlight, saveGame, takeInFlight, type PromptResult } from '@/lib/progress'
+import { logGameFinish, logGameStart, logSistemigroClick } from '@/lib/client-events'
 import { pointsToTier, totalToTitle } from '@/lib/score'
 import {
   ANSWER_MS,
@@ -115,6 +118,7 @@ export function GameClient({ gameId, title, prompts }: Props) {
   })
   const [draft, setDraft] = useState('')
   const [segmentsLeft, setSegmentsLeft] = useState(SEGMENTS)
+  const [packsDone, setPacksDone] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const prompt = prompts[state.index]
@@ -197,11 +201,15 @@ export function GameClient({ gameId, title, prompts }: Props) {
 
   useEffect(() => {
     if (!finished) return
+    const total = state.results.reduce((sum, r) => sum + r.points, 0)
     saveGame(gameId, {
-      score: state.results.reduce((total, r) => total + r.points, 0),
+      score: total,
       results: state.results,
       finishedAt: new Date().toISOString(),
     })
+    // Counted after the save, so this game counts itself in "Pachete: N/7".
+    setPacksDone(countFinished())
+    logGameFinish(gameId, total)
   }, [finished, gameId, state.results])
 
   async function submit(event: React.FormEvent) {
@@ -297,10 +305,19 @@ export function GameClient({ gameId, title, prompts }: Props) {
         })}
       </ol>
 
+      {/* On the result card the highlight previews the NEXT region, not the one
+          just stitched — the brief's "Continuă, cu o previzualizare a regiunii
+          următoare". Highlighting what was just filled only restates it. */}
       <StitchMap
         className="mt-3 w-full"
         tiers={tiers}
-        highlight={done ? undefined : prompt?.region}
+        highlight={
+          done
+            ? undefined
+            : phase === 'result'
+              ? prompts[state.index + 1]?.region
+              : prompt?.region
+        }
       />
 
       {phase === 'idle' && (
@@ -312,7 +329,10 @@ export function GameClient({ gameId, title, prompts }: Props) {
           <button
             type="button"
             className="btn-thread mt-4 w-full bg-action px-4 py-3 text-base text-white"
-            onClick={() => dispatch({ type: 'begin', at: Date.now() })}
+            onClick={() => {
+              logGameStart(gameId)
+              dispatch({ type: 'begin', at: Date.now() })
+            }}
           >
             Începe
           </button>
@@ -415,10 +435,47 @@ export function GameClient({ gameId, title, prompts }: Props) {
           <p className="mt-3 text-xl tracking-widest" aria-hidden="true">
             {state.results.map((r) => TIER_SQUARE[pointsToTier(r.points)]).join('')}
           </p>
-          {/* TODO Phase 2: ShareButton (navigator.share + clipboard fallback) goes here. */}
+
+          <div className="mt-4 flex flex-col gap-2.5">
+            <ShareButton
+              gameTitle={title}
+              score={score}
+              tiers={state.results.map((r) => pointsToTier(r.points))}
+              packsDone={packsDone}
+            />
+            <Link
+              href={`/joc/${gameId}/raspunsuri`}
+              className="border-[3px] bg-card px-3 py-2.5 text-base font-bold no-underline"
+            >
+              Vezi răspunsurile
+            </Link>
+            <Link
+              href="/"
+              className="border-[3px] bg-blue px-3 py-2.5 text-base font-bold text-white no-underline"
+            >
+              Următorul pachet
+            </Link>
+          </div>
+
           <p className="mt-3 text-xs text-muted">
             Scorul oficial e salvat. Poți rejuca pentru distracție.
           </p>
+
+          <aside className="mt-5 -mx-4 -mb-4 flex flex-col gap-1.5 bg-ink px-4 py-4 text-left text-linen">
+            <span className="font-display text-lg font-bold">Ai o idee de aplicație?</span>
+            <span className="text-sm leading-snug">
+              Am construit jocul ăsta în 4 zile. Hai să vorbim despre al tău.
+            </span>
+            <a
+              href="https://sistemigro.com?utm_source=unul-la-un-milion&utm_medium=final&utm_campaign=1-decembrie"
+              target="_blank"
+              rel="noopener"
+              onClick={() => logSistemigroClick('final')}
+              className="text-sm font-bold text-yellow"
+            >
+              sistemigro.com
+            </a>
+          </aside>
         </section>
       )}
     </div>

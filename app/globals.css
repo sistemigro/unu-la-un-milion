@@ -15,7 +15,9 @@
   --color-muted: #5a4e40;
   --color-faint: #6b5d4a;
   --color-hairline: #8c7b62;
-  --color-dashed: #a08c6e;
+  /* Not `--color-dashed`: that would generate a `border-dashed` colour utility
+     shadowing Tailwind's built-in border-style one. */
+  --color-placeholder: #a08c6e;
   --color-unspent: #d8c9ae;
 
   /* Brand + tricolour */

@@ -1,4 +1,4 @@
-import type { GameId, RegionId, Tier } from '@/lib/types'
+import { GAME_IDS, type GameId, type RegionId, type Tier } from '@/lib/types'
 
 /**
  * Browser-only progress. No accounts, no server copy.
@@ -107,3 +107,9 @@ export function takeInFlight(gameId: GameId): string | null {
     return null
   }
 }
+
+/** How many of the seven packs have an official score — the "Pachete: N/7" figure. */
+export function countFinished(): number {
+  return GAME_IDS.filter((id) => loadGame(id) !== null).length
+}
+

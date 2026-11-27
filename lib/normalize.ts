@@ -37,7 +37,13 @@ function stripArticle(key: string): string | null {
  */
 export function expandKeys(answer: BankAnswer): string[] {
   const keys = new Set<string>()
-  const base = [answer.name, ...(answer.alias ?? [])]
+  // A bare string where an array belongs would spread into single characters
+  // ("chișcă" → c, h, i, ș, c, ă), quietly filling the index with one-letter
+  // keys that match almost anything. Coerce instead; `tests/banks.test.ts`
+  // still fails the bank loudly so the data gets fixed.
+  const aliases =
+    typeof answer.alias === 'string' ? [answer.alias] : (answer.alias ?? [])
+  const base = [answer.name, ...aliases]
 
   for (const raw of base) {
     const key = normalize(raw)

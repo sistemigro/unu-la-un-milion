@@ -90,6 +90,22 @@ describe.each(present)('%s', (gameId) => {
       expect(prompt.answers.length).toBeLessThanOrEqual(30)
     })
 
+    it('declares alias as an array of lowercase strings', () => {
+      // A bare string here spreads into single characters downstream, which
+      // poisons the match index with one-letter keys. Caught explicitly so the
+      // failure names the real cause.
+      for (const answer of prompt.answers) {
+        if (answer.alias === undefined) continue
+        expect(
+          Array.isArray(answer.alias),
+          `${answer.name}: alias must be an array, got ${typeof answer.alias}`,
+        ).toBe(true)
+        for (const alias of answer.alias) {
+          expect(typeof alias, `${answer.name}: alias entries must be strings`).toBe('string')
+        }
+      }
+    })
+
     it('has pop in 1..100 and a fact-check note on every answer', () => {
       for (const answer of prompt.answers) {
         expect(Number.isInteger(answer.pop), `${answer.name}: pop must be an integer`).toBe(
