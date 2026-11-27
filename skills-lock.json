@@ -1,0 +1,278 @@
+{
+  "version": 2,
+  "skills": {
+    "accessibility-audit": {
+      "source": "AccessLint/skills",
+      "commit": "2e9d7336678302d0bc08848e92542560295b34d3",
+      "sourceType": "github",
+      "skillPath": "plugins/accesslint/skills/accessibility-audit/SKILL.md",
+      "computedHash": "9664edf4d5c7b9ac7e416d1e198bebefb7565cbb0e3869d6c10df6d610fd026a"
+    },
+    "accessibility-diff": {
+      "source": "AccessLint/skills",
+      "commit": "2e9d7336678302d0bc08848e92542560295b34d3",
+      "sourceType": "github",
+      "skillPath": "plugins/accesslint/skills/accessibility-diff/SKILL.md",
+      "computedHash": "ff2cc6767f7f9288018f2b4a5f6dbc374f571f00c2a10fbe1c291a0738a02917"
+    },
+    "accessibility-fix": {
+      "source": "AccessLint/skills",
+      "commit": "2e9d7336678302d0bc08848e92542560295b34d3",
+      "sourceType": "github",
+      "skillPath": "plugins/accesslint/skills/accessibility-fix/SKILL.md",
+      "computedHash": "4b3435a1e6eaf7a4e6b7497d45831e0d4c338591bd980bfa48cc1597b522fa39"
+    },
+    "accessibility-inspect": {
+      "source": "AccessLint/skills",
+      "commit": "2e9d7336678302d0bc08848e92542560295b34d3",
+      "sourceType": "github",
+      "skillPath": "plugins/accesslint/skills/accessibility-inspect/SKILL.md",
+      "computedHash": "c63f0b5e064c81de58eedc01ddac05456212f7d3e2658409f81bb4d949734f98"
+    },
+    "accessibility-scan": {
+      "source": "AccessLint/skills",
+      "commit": "2e9d7336678302d0bc08848e92542560295b34d3",
+      "sourceType": "github",
+      "skillPath": "plugins/accesslint/skills/accessibility-scan/SKILL.md",
+      "computedHash": "f548cbfd3a0032758cc30605d4ba1485d0ee41ea4d98374c35311ed702409bde"
+    },
+    "commit-changes": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/commit-changes/SKILL.md",
+      "computedHash": "8d9944f95997b2468e966083414f81c1c37d972a2db5a3de19ba9d9dc00961df"
+    },
+    "create-new-branch": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/create-new-branch/SKILL.md",
+      "computedHash": "96e0207a22d2228495e3c654c9c67b379e9ea328c3eedc88c4c324c082cdf547"
+    },
+    "create-pull-request": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/create-pull-request/SKILL.md",
+      "computedHash": "e1be062493485c66dcc243d954d518f7b22f5fe9690d0d68355f3d776df4baf8"
+    },
+    "deploy-to-vercel": {
+      "source": "vercel-labs/agent-skills",
+      "commit": "5a37a6329fbad3666c3207392a6a7c0110e92efb",
+      "sourceType": "github",
+      "skillPath": "skills/deploy-to-vercel/SKILL.md",
+      "computedHash": "66b99dfa063b1c405155e9bffd99c04ca3e312e81b168d540b757bb194b7400a"
+    },
+    "design-anti-patterns": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/design-anti-patterns/SKILL.md",
+      "computedHash": "c799a184d8498ec04cc0b5ae854574b1f27e2ee3bcb2e09986257d4bb040cf2d"
+    },
+    "design-audit": {
+      "source": "bencium/bencium-marketplace",
+      "commit": "5de46a39b4640fa419560cd0b67e4c4b50dac802",
+      "sourceType": "github",
+      "skillPath": "design-audit/skills/design-audit/SKILL.md",
+      "computedHash": "864c1af4c7379a1d55329e8b69a1e3c73ea770f8df59a4bfa82c0f954f3bbcdc"
+    },
+    "design-system": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "72e5fc76a4f3eb37747dc472cb3091bd46e7752a",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/design-system/SKILL.md",
+      "computedHash": "9efdc106c73d8d298b5a90d55c56995840a37f754fb9d498d14e6562bdaadc23"
+    },
+    "docx": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/docx/SKILL.md",
+      "computedHash": "20881307726dc87b9a1b0b2f9770ae869c2753081faedb5f89249d89a94e30a2"
+    },
+    "eu-ai-act-reviewer": {
+      "source": "bencium/bencium-marketplace",
+      "commit": "5de46a39b4640fa419560cd0b67e4c4b50dac802",
+      "sourceType": "github",
+      "skillPath": "eu-ai-act-reviewer/skills/eu-ai-act-reviewer/SKILL.md",
+      "computedHash": "438c800e2cd29bbc5664163ecfd3c6c1a0d94f0cc41913b66c3787b195c27912"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "83485963700bcf11d5bf78118facb301676b69d918fee2e45a95e7f1a2840f6c"
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "commit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "computedHash": "ab1acb9fbd9eaee03da254abb8a8de228d1e7a07475fe959da4a5eefa34ea4b9"
+    },
+    "grilling": {
+      "source": "mattpocock/skills",
+      "commit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grilling/SKILL.md",
+      "computedHash": "485451958784497cd4c4dbea13cb5bbb579da58fac0d0e45f3bcb310fab68ac7"
+    },
+    "implementer": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/implementer/SKILL.md",
+      "computedHash": "a7362d263c3daf113c932199ec56ffd19629f789f430e7b4bf4807cfd2afd1d4"
+    },
+    "keyword-research": {
+      "source": "every-app/open-seo",
+      "commit": "6f68494e92a695db17f4b22da25e84b9bf1e582c",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/keyword-research/SKILL.md",
+      "computedHash": "671a0b7926d23342f7287a3dbd793f8db4335a77a78f03d408052723641b8fb9"
+    },
+    "nextjs-ssr": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/nextjs-ssr/SKILL.md",
+      "computedHash": "f7c3874d98c887e25ebc7b6c3716e3f32dcd541bfddeb56d2c5ded20ccea889a"
+    },
+    "pdf": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/pdf/SKILL.md",
+      "computedHash": "c9c58ce1e1c334d4beb50dfe97aee27aee1d074aed17b3aa1df03b8982028200"
+    },
+    "planner": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/planner/SKILL.md",
+      "computedHash": "c58d3c173074d0f05bfd49b5bf0b28e6da585951395519d4d93d0707f017e906"
+    },
+    "ponytail": {
+      "source": "DietrichGebert/ponytail",
+      "commit": "ebd8654c2c627f721eb8f9c0d1bd4090a29f9e10",
+      "sourceType": "github",
+      "skillPath": "skills/ponytail/SKILL.md",
+      "computedHash": "56d72677aca02689ac89bd48734e8c19b40ab86716d1257eaf5f1238b43cda6b"
+    },
+    "pptx": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/pptx/SKILL.md",
+      "computedHash": "e3c37c284de3a271a7e135d0cea5ead7cfaf002b83719d72e958963ccc5dd52f"
+    },
+    "reviewer": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/reviewer/SKILL.md",
+      "computedHash": "be645cc0d188c8632a7412689c978d70bfd61c9d09295baf7d463833061ed79f"
+    },
+    "security-audit": {
+      "source": "cloudflare/security-audit-skill",
+      "commit": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+      "sourceType": "github",
+      "skillPath": "skills/security-audit/SKILL.md",
+      "computedHash": "8513eb3b2c39b8d05ef4f47b32ef4d18280b93a5efb91d8df6272f7435034af5"
+    },
+    "seo-geo-aeo": {
+      "source": "SNLabat/SEO-GEO-AEO-Skill",
+      "commit": "a2c8769b85813912b2b01cd12c3484f061b439fc",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "92e938ef555a3988d12bce57b1a5ef338dfe38fa8647e23fa5790c09f11add25"
+    },
+    "setup": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/setup/SKILL.md",
+      "computedHash": "ff69d6a80e288e3a953e48bf9603a927b53e97ec10c11388e87539b1802a64b1"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "computedHash": "2d7f889e6ae93c6c27d699856942c336b5b8644537496987d5571043d059b1dc"
+    },
+    "test-author": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/test-author/SKILL.md",
+      "computedHash": "b52c8494326cb7ac8f4aad74d23f0da36820df7c849f685a1c9028f08efb1d8c"
+    },
+    "tester": {
+      "source": "sistemigro/common-skills",
+      "commit": "c961d68c91f3e9689e8ee24b760f0b9ca9920aa0",
+      "sourceType": "github",
+      "skillPath": "skills/tester/SKILL.md",
+      "computedHash": "6743cb803405bcd482766a211bd95893214c4d2b93b81465b6c70c71462488ee"
+    },
+    "ui-typography": {
+      "source": "bencium/bencium-marketplace",
+      "commit": "5de46a39b4640fa419560cd0b67e4c4b50dac802",
+      "sourceType": "github",
+      "skillPath": "typography/skills/typography/SKILL.md",
+      "computedHash": "a8e109c18e1a7286eac9d7c9ef679de0dfef363527b5a037cbbef7f8991d5b8d"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "72e5fc76a4f3eb37747dc472cb3091bd46e7752a",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "e960cc1c18fed7c3a88e4c2129157e35939e5e039b44b1e8d6b333fafa7653bb"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "commit": "5a37a6329fbad3666c3207392a6a7c0110e92efb",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "7991ed4fbecdac23f47c1a40c243e00a212a9e7f3604db93959b3ae11dffe299"
+    },
+    "web-artifacts-builder": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/web-artifacts-builder/SKILL.md",
+      "computedHash": "7a081b86fd5068d3ca2c4d9c059956634feff65ccbf1c39c3d34a6e5d0971139"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "commit": "5a37a6329fbad3666c3207392a6a7c0110e92efb",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "5994e4cfd86144903d2ba750f862b9e36af15e3297aac983679e347b99f6cb71"
+    },
+    "webapp-testing": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/webapp-testing/SKILL.md",
+      "computedHash": "48cd9a742a59250edec6db89cf081ef5465f365e2133f6d6c5e29c380b754b7d"
+    },
+    "writing-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "commit": "5a37a6329fbad3666c3207392a6a7c0110e92efb",
+      "sourceType": "github",
+      "skillPath": "skills/writing-guidelines/SKILL.md",
+      "computedHash": "fe1390adbe2f7ba68d5fb85d3b14a1d55e71ce04cff5c175245c550d1c3a6f7e"
+    },
+    "xlsx": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/xlsx/SKILL.md",
+      "computedHash": "5100b54957a73ce2cb55933b224a483793f5f71555a181f287f43f94a9c1e149"
+    }
+  }
+}
